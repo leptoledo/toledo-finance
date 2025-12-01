@@ -23,12 +23,12 @@ export default async function AdminFeedbackPage() {
     return (
         <div className="space-y-8 animate-fade-in">
             <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
+                <div className="p-3 rounded-xl bg-linear-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/50">
                     <Shield className="h-8 w-8 text-white" />
                 </div>
                 <div>
                     <h3 className="text-3xl sm:text-4xl font-bold">
-                        <span className="bg-gradient-to-r from-red-400 to-orange-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-red-400 to-orange-500 bg-clip-text text-transparent">
                             Painel Admin - Feedbacks
                         </span>
                     </h3>
@@ -39,7 +39,7 @@ export default async function AdminFeedbackPage() {
             </div>
 
             <div className="relative overflow-hidden rounded-2xl glass border border-red-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-orange-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-red-500/5 via-orange-500/5 to-transparent" />
                 <div className="relative p-6 sm:p-8">
                     <div className="flex items-center gap-3 mb-6">
                         <MessageSquare className="h-6 w-6 text-red-400" />

@@ -181,13 +181,13 @@ export function FeedbackForm() {
 
             {message && (
                 <div className={`p-4 rounded-lg border flex items-start gap-3 ${message.type === 'success'
-                        ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-                        : 'bg-red-500/10 border-red-500/20 text-red-400'
+                    ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                    : 'bg-red-500/10 border-red-500/20 text-red-400'
                     }`}>
                     {message.type === 'success' ? (
-                        <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
                     ) : (
-                        <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                        <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
                     )}
                     <p className="text-sm">{message.text}</p>
                 </div>
@@ -196,7 +196,7 @@ export function FeedbackForm() {
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/50"
+                className="w-full bg-linear-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/50"
             >
                 {isSubmitting ? (
                     <>

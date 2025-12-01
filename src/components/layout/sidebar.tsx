@@ -48,11 +48,11 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
             {/* Header com gradiente */}
             <div className="relative px-6 py-8 border-b border-white/10 overflow-hidden">
                 {/* Background decorativo */}
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
+                <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10" />
 
                 <div className="relative space-y-3">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
+                        <div className="p-2 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
                             <Sparkles className="h-6 w-6 text-white" />
                         </div>
                         <div>
@@ -63,7 +63,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
 
                     {/* User info */}
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold shadow-lg">
+                        <div className="h-10 w-10 rounded-full bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold shadow-lg">
                             {userName.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -87,18 +87,18 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                                 className={cn(
                                     'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                                     isActive
-                                        ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-white shadow-lg shadow-indigo-500/20 border border-indigo-500/30'
+                                        ? 'bg-linear-to-r from-indigo-500/20 to-purple-500/20 text-white shadow-lg shadow-indigo-500/20 border border-indigo-500/30'
                                         : 'text-gray-400 hover:text-white hover:bg-white/5'
                                 )}
                             >
                                 {/* Active indicator */}
                                 {isActive && (
-                                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-r-full" />
+                                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-linear-to-b from-indigo-500 to-purple-600 rounded-r-full" />
                                 )}
 
                                 {/* Icon with color */}
                                 <div className={cn(
-                                    'flex-shrink-0 transition-transform duration-200',
+                                    'shrink-0 transition-transform duration-200',
                                     isActive ? 'scale-110' : 'group-hover:scale-110'
                                 )}>
                                     <Icon
@@ -120,7 +120,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
 
                                 {/* Hover glow effect */}
                                 {!isActive && (
-                                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300" />
+                                    <div className="absolute inset-0 bg-linear-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300" />
                                 )}
                             </Link>
                         )
@@ -129,22 +129,22 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
             </div>
 
             {/* Settings at bottom */}
-            <div className="flex flex-col flex-shrink-0 border-t border-white/10 p-4 space-y-1">
+            <div className="flex flex-col shrink-0 border-t border-white/10 p-4 space-y-1">
                 <Link
                     href="/feedback"
                     className={cn(
                         'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                         pathname === '/feedback'
-                            ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-white shadow-lg shadow-blue-500/20 border border-blue-500/30'
+                            ? 'bg-linear-to-r from-blue-500/20 to-cyan-500/20 text-white shadow-lg shadow-blue-500/20 border border-blue-500/30'
                             : 'text-gray-400 hover:text-white hover:bg-white/5'
                     )}
                 >
                     {pathname === '/feedback' && (
-                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-600 rounded-r-full" />
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-linear-to-b from-blue-500 to-cyan-600 rounded-r-full" />
                     )}
 
                     <div className={cn(
-                        'flex-shrink-0 transition-transform duration-200',
+                        'shrink-0 transition-transform duration-200',
                         pathname === '/feedback' ? 'scale-110' : 'group-hover:scale-110'
                     )}>
                         <MessageSquare
@@ -164,7 +164,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                     </span>
 
                     {pathname !== '/feedback' && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-cyan-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:via-cyan-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-r from-blue-500/0 via-cyan-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:via-cyan-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300" />
                     )}
                 </Link>
 
@@ -173,16 +173,16 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                     className={cn(
                         'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                         pathname === '/settings'
-                            ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-white shadow-lg shadow-indigo-500/20 border border-indigo-500/30'
+                            ? 'bg-linear-to-r from-indigo-500/20 to-purple-500/20 text-white shadow-lg shadow-indigo-500/20 border border-indigo-500/30'
                             : 'text-gray-400 hover:text-white hover:bg-white/5'
                     )}
                 >
                     {pathname === '/settings' && (
-                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-r-full" />
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-linear-to-b from-indigo-500 to-purple-600 rounded-r-full" />
                     )}
 
                     <div className={cn(
-                        'flex-shrink-0 transition-transform duration-200',
+                        'shrink-0 transition-transform duration-200',
                         pathname === '/settings' ? 'scale-110' : 'group-hover:scale-110'
                     )}>
                         <Settings
@@ -202,7 +202,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                     </span>
 
                     {pathname !== '/settings' && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300" />
                     )}
                 </Link>
 
@@ -213,16 +213,16 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                         className={cn(
                             'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                             pathname.startsWith('/admin')
-                                ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 text-white shadow-lg shadow-red-500/20 border border-red-500/30'
+                                ? 'bg-linear-to-r from-red-500/20 to-orange-500/20 text-white shadow-lg shadow-red-500/20 border border-red-500/30'
                                 : 'text-gray-400 hover:text-white hover:bg-white/5'
                         )}
                     >
                         {pathname.startsWith('/admin') && (
-                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-red-500 to-orange-600 rounded-r-full" />
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-linear-to-b from-red-500 to-orange-600 rounded-r-full" />
                         )}
 
                         <div className={cn(
-                            'flex-shrink-0 transition-transform duration-200',
+                            'shrink-0 transition-transform duration-200',
                             pathname.startsWith('/admin') ? 'scale-110' : 'group-hover:scale-110'
                         )}>
                             <Shield
@@ -242,7 +242,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                         </span>
 
                         {pathname !== '/admin' && (
-                            <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-orange-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:via-orange-500/5 group-hover:to-red-500/5 rounded-xl transition-all duration-300" />
+                            <div className="absolute inset-0 bg-linear-to-r from-red-500/0 via-orange-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:via-orange-500/5 group-hover:to-red-500/5 rounded-xl transition-all duration-300" />
                         )}
                     </Link>
                 )}
