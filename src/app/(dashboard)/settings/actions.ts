@@ -13,14 +13,34 @@ export async function updateProfile(formData: FormData) {
     }
 
     const currency = formData.get('currency') as string
+    const first_name = formData.get('first_name') as string
+    const last_name = formData.get('last_name') as string
+    const avatar_url = formData.get('avatar_url') as string
 
-    const { error } = await supabase
+    const updates: any = {
+        id: user.id, // Necessário para upsert
+        currency,
+        first_name,
+        last_name,
+        updated_at: new Date().toISOString(),
+    }
+
+    if (avatar_url) {
+        updates.avatar_url = avatar_url
+    }
+
+    console.log('Dados recebidos:', { currency, first_name, last_name, avatar_url })
+
+    const { data, error } = await supabase
         .from('profiles')
-        .update({ currency, updated_at: new Date().toISOString() })
-        .eq('id', user.id)
+        .upsert(updates)
+        .select()
+
+    console.log('Resultado do update:', { data, error })
 
     if (error) {
-        return { error: 'Erro ao atualizar perfil' }
+        console.error('Erro no update:', error)
+        return { error: `Erro técnico: ${error.message} (Código: ${error.code})` }
     }
 
     revalidatePath('/settings')

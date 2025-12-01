@@ -98,7 +98,7 @@ export async function deleteCategory(id: string) {
         .eq('user_id', user.id)
 
     if (error) {
-        console.error('Error deleting category:', error)
+        console.error('Error deleting category (supabase):', error)
         return { error: error.message }
     }
 

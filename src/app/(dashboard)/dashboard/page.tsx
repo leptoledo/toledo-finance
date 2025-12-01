@@ -1,6 +1,9 @@
 import { getDashboardData } from '../dashboard-actions'
 import { KPICards } from '@/components/dashboard/kpi-cards'
 import { CashFlowChart } from '@/components/dashboard/cash-flow-chart'
+import { ExpensesByCategoryChart } from '@/components/dashboard/expenses-by-category-chart'
+import { MonthlyComparisonChart } from '@/components/dashboard/monthly-comparison-chart'
+import { BalanceEvolutionChart } from '@/components/dashboard/balance-evolution-chart'
 import { InsightsSection } from '@/components/dashboard/insights-section'
 import { GoalsSection } from '@/components/dashboard/goals-section'
 import { redirect } from 'next/navigation'
@@ -12,7 +15,15 @@ export default async function DashboardPage() {
         redirect('/login')
     }
 
-    const { currency, financials, goals, chartData } = data
+    const {
+        currency,
+        financials,
+        goals,
+        chartData,
+        expensesByCategoryData,
+        monthlyComparisonData,
+        balanceEvolutionData
+    } = data
 
     return (
         <div className="flex flex-col gap-8">
@@ -33,6 +44,13 @@ export default async function DashboardPage() {
                 <CashFlowChart data={chartData} currency={currency} />
                 <InsightsSection />
             </div>
+
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+                <ExpensesByCategoryChart data={expensesByCategoryData} currency={currency} />
+                <BalanceEvolutionChart data={balanceEvolutionData} currency={currency} />
+            </div>
+
+            <MonthlyComparisonChart data={monthlyComparisonData} currency={currency} />
 
             <GoalsSection goals={goals.active} currency={currency} />
         </div>

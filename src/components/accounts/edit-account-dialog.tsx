@@ -104,18 +104,20 @@ export function EditAccountDialog({ account, isOpen, onClose }: EditAccountDialo
                         </div>
 
                         <div className="space-y-2">
-                            <Label className="text-gray-400">Saldo Atual</Label>
-                            <div className="p-3 rounded-lg bg-gray-800/30 border border-white/5">
-                                <p className="text-2xl font-bold text-yellow-400">
-                                    {new Intl.NumberFormat('pt-BR', {
-                                        style: 'currency',
-                                        currency: 'BRL',
-                                    }).format(Number(account.balance))}
-                                </p>
-                                <p className="text-xs text-gray-400 mt-1">
-                                    O saldo é atualizado automaticamente pelas transações
-                                </p>
-                            </div>
+                            <Label htmlFor="balance" className="text-white">Saldo Atual</Label>
+                            <Input
+                                id="balance"
+                                name="balance"
+                                type="number"
+                                step="0.01"
+                                defaultValue={account.balance}
+                                required
+                                className="bg-gray-800/50 border-white/10"
+                                placeholder="0,00"
+                            />
+                            <p className="text-xs text-gray-400">
+                                Você pode ajustar o saldo manualmente se necessário
+                            </p>
                         </div>
 
                         <div className="flex gap-3 pt-4">

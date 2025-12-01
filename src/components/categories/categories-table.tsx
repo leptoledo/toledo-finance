@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuItem } from '@/components/ui/dropdown-menu'
@@ -8,6 +9,7 @@ import { MoreHorizontal, Trash2, Pencil } from 'lucide-react'
 import { deleteCategory } from '@/app/(dashboard)/categories/actions'
 import { useToast } from '@/components/ui/toast'
 import { EditCategoryDialog } from './edit-category-dialog'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 
 interface Category {
     id: string
@@ -25,38 +27,42 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
     const { showToast } = useToast()
     const [isPending, startTransition] = useTransition()
     const [editingCategory, setEditingCategory] = useState<Category | null>(null)
+    const [deletingCategoryId, setDeletingCategoryId] = useState<string | null>(null)
 
     // All categories are user categories (no system defaults)
     const customCategories = categories
 
+    const router = useRouter()
     const handleDelete = (id: string) => {
-        if (confirm('Tem certeza que deseja excluir esta categoria?')) {
-            startTransition(async () => {
-                const result = await deleteCategory(id)
-                if (result.success) {
-                    showToast('Categoria excluída com sucesso!', 'success')
-                } else {
-                    showToast(result.error || 'Erro ao excluir categoria', 'error')
-                }
-            })
-        }
+        setDeletingCategoryId(id)
+    }
+
+    const confirmDelete = () => {
+        if (!deletingCategoryId) return
+
+        startTransition(async () => {
+            const result = await deleteCategory(deletingCategoryId)
+            if (result.success) {
+                showToast('Categoria excluída com sucesso!', 'success')
+                router.refresh()
+            } else {
+                showToast(result.error || 'Erro ao excluir categoria', 'error')
+            }
+        })
     }
 
     return (
         <>
             <div className="rounded-md border border-border overflow-hidden">
-                <div className="w-full overflow-auto">
+                <div className="w-full overflow-x-auto overflow-y-visible">
                     <table className="w-full caption-bottom text-sm text-left">
                         <thead className="[&_tr]:border-b [&_tr]:border-border">
                             <tr className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[40%]">
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[60%]">
                                     Nome
                                 </th>
-                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[20%]">
-                                    Tipo
-                                </th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[30%]">
-                                    ID
+                                    Tipo
                                 </th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[10%]">
 
@@ -72,7 +78,7 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
                                     >
                                         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
                                             <div className="flex items-center gap-3">
-                                                <span className="text-lg">{category.icon || '💰'}</span>
+                                                <span className="text-lg">{category.icon}</span>
                                                 <span className="font-medium text-white">{category.name}</span>
                                             </div>
                                         </td>
@@ -83,11 +89,6 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
                                             >
                                                 {category.type === 'income' ? 'Receita' : 'Despesa'}
                                             </Badge>
-                                        </td>
-                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-                                            <span className="text-muted-foreground font-mono text-xs truncate block max-w-[200px]">
-                                                {category.id}
-                                            </span>
                                         </td>
                                         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-right">
                                             <DropdownMenu
@@ -122,7 +123,7 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={4} className="h-24 text-center align-middle text-muted-foreground">
+                                    <td colSpan={3} className="h-24 text-center align-middle text-muted-foreground">
                                         Nenhuma categoria personalizada encontrada.
                                     </td>
                                 </tr>
@@ -139,6 +140,17 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
                     category={editingCategory}
                 />
             )}
+
+            <ConfirmDialog
+                isOpen={!!deletingCategoryId}
+                onClose={() => setDeletingCategoryId(null)}
+                onConfirm={confirmDelete}
+                title="Excluir Categoria"
+                description="Tem certeza que deseja excluir esta categoria? As transações associadas a ela ficarão sem categoria."
+                confirmText="Excluir"
+                cancelText="Cancelar"
+                variant="danger"
+            />
         </>
     )
 }

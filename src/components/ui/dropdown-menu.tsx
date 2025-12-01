@@ -29,12 +29,12 @@ export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
     }, [isOpen])
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative inline-block" ref={dropdownRef}>
             <div onClick={() => setIsOpen(!isOpen)}>
                 {trigger}
             </div>
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md border border-border bg-card shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-48 rounded-md border border-border bg-card shadow-lg z-[100] animate-in fade-in-0 zoom-in-95">
                     <div className="py-1">
                         {children}
                     </div>
@@ -52,9 +52,14 @@ interface DropdownMenuItemProps {
 }
 
 export function DropdownMenuItem({ onClick, children, className, variant = 'default' }: DropdownMenuItemProps) {
+    const handleClick = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        onClick?.()
+    }
+
     return (
         <button
-            onClick={onClick}
+            onClick={handleClick}
             className={cn(
                 'w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2',
                 variant === 'default' && 'text-foreground hover:bg-muted',

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, Calendar } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Budget } from '@/lib/budgets'
 import { BudgetSummary } from './budget-summary'
@@ -19,17 +19,10 @@ interface BudgetsViewProps {
         overBudgetCount: number
     }
     categories: Array<{ id: string; name: string; icon: string | null }>
-    currentMonth: number
-    currentYear: number
 }
 
-export function BudgetsView({ budgets, summary, categories, currentMonth, currentYear }: BudgetsViewProps) {
+export function BudgetsView({ budgets, summary, categories }: BudgetsViewProps) {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-
-    const months = [
-        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ]
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -42,7 +35,7 @@ export function BudgetsView({ budgets, summary, categories, currentMonth, curren
                         </span>
                     </h2>
                     <p className="text-muted-foreground">
-                        Defina e acompanhe seus orçamentos mensais.
+                        Defina e acompanhe seus orçamentos.
                     </p>
                 </div>
                 <Button
@@ -52,12 +45,6 @@ export function BudgetsView({ budgets, summary, categories, currentMonth, curren
                     <Plus className="mr-2 h-4 w-4" />
                     Novo Orçamento
                 </Button>
-            </div>
-
-            {/* Month/Year Indicator */}
-            <div className="flex items-center gap-2 text-sm text-gray-400">
-                <Calendar className="h-4 w-4" />
-                <span>Exibindo orçamentos de {months[currentMonth - 1]} {currentYear}</span>
             </div>
 
             {/* Summary Cards */}

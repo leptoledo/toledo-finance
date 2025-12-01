@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DropdownMenu, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { EditIncomeDialog } from './edit-income-dialog'
+import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { Search, Filter, MoreHorizontal, Trash2, Pencil } from 'lucide-react'
 import { deleteTransaction } from '@/app/(dashboard)/income/actions'
+import { useToast } from '@/components/ui/toast'
 
 interface Transaction {
     id: string
@@ -20,6 +22,7 @@ interface Transaction {
     category: {
         name: string
         type: string
+        icon?: string
     } | null
 }
 
@@ -34,20 +37,32 @@ interface IncomeTableProps {
 
 export function IncomeTable({ transactions, currency = 'BRL', options }: IncomeTableProps) {
     const router = useRouter()
+    const { showToast } = useToast()
     const [search, setSearch] = useState('')
     const [isPending, startTransition] = useTransition()
     const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
+    const [deletingTransactionId, setDeletingTransactionId] = useState<string | null>(null)
 
     const filteredTransactions = transactions.filter(t =>
         t.title.toLowerCase().includes(search.toLowerCase())
     )
 
     const handleDelete = (id: string) => {
-        if (confirm('Tem certeza que deseja excluir esta receita?')) {
-            startTransition(async () => {
-                await deleteTransaction(id)
-            })
-        }
+        setDeletingTransactionId(id)
+    }
+
+    const confirmDelete = () => {
+        if (!deletingTransactionId) return
+
+        startTransition(async () => {
+            const result = await deleteTransaction(deletingTransactionId)
+            if (result?.success) {
+                showToast('Receita excluída com sucesso!', 'success')
+                router.refresh()
+            } else {
+                showToast('Erro ao excluir receita', 'error')
+            }
+        })
     }
 
     const handleEdit = (transaction: Transaction) => {
@@ -88,61 +103,98 @@ export function IncomeTable({ transactions, currency = 'BRL', options }: IncomeT
             </div>
 
             {/* Table with horizontal scroll on mobile */}
-            <div className="rounded-md border border-border overflow-x-auto">
-                <div className="min-w-[600px]">
-                    <div className="grid grid-cols-[2fr,1.5fr,1fr,1fr,auto] gap-4 p-4 text-sm font-medium text-muted-foreground border-b border-border">
-                        <div>Título</div>
-                        <div>Categoria</div>
-                        <div>Data</div>
-                        <div className="text-right">Valor</div>
-                        <div className="w-8"></div>
-                    </div>
-                    <div className="divide-y divide-border">
-                        {filteredTransactions.map((transaction) => (
-                            <div key={transaction.id} className="grid grid-cols-[2fr,1.5fr,1fr,1fr,auto] gap-4 p-4 items-center text-sm hover:bg-muted/50 transition-colors">
-                                <div className="font-medium text-foreground">{transaction.title}</div>
-                                <div>
-                                    <Badge variant="success" className="px-3">
-                                        {transaction.category?.name || 'Sem categoria'}
-                                    </Badge>
-                                </div>
-                                <div className="text-foreground">{formatDate(transaction.date)}</div>
-                                <div className="text-right font-medium text-emerald-500">
-                                    {formatCurrency(transaction.amount)}
-                                </div>
-                                <div className="flex justify-end">
-                                    <DropdownMenu
-                                        trigger={
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                                            >
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        }
+            <div className="rounded-md border border-border overflow-hidden">
+                <div className="w-full overflow-x-auto overflow-y-visible">
+                    <table className="w-full caption-bottom text-sm text-left">
+                        <thead className="[&_tr]:border-b [&_tr]:border-border">
+                            <tr className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[40%]">
+                                    Título
+                                </th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[20%]">
+                                    Categoria
+                                </th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[15%]">
+                                    Data
+                                </th>
+                                <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[15%]">
+                                    Valor
+                                </th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[10%]">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="[&_tr:last-child]:border-0">
+                            {filteredTransactions.length > 0 ? (
+                                filteredTransactions.map((transaction) => (
+                                    <tr
+                                        key={transaction.id}
+                                        className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
                                     >
-                                        <DropdownMenuItem onClick={() => handleEdit(transaction)}>
-                                            <Pencil className="h-4 w-4" />
-                                            Editar
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem
-                                            variant="destructive"
-                                            onClick={() => handleDelete(transaction.id)}
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                            Excluir
-                                        </DropdownMenuItem>
-                                    </DropdownMenu>
-                                </div>
-                            </div>
-                        ))}
-                        {filteredTransactions.length === 0 && (
-                            <div className="p-8 text-center text-muted-foreground">
-                                Nenhuma receita encontrada.
-                            </div>
-                        )}
-                    </div>
+                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-lg">{transaction.category?.icon}</span>
+                                                <span className="font-medium text-white">{transaction.title}</span>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+                                            <Badge
+                                                variant="secondary"
+                                                className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 font-normal border border-emerald-500/20"
+                                            >
+                                                {transaction.category?.name || 'Sem categoria'}
+                                            </Badge>
+                                        </td>
+                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+                                            <span className="text-muted-foreground">
+                                                {formatDate(transaction.date)}
+                                            </span>
+                                        </td>
+                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-right">
+                                            <span className="font-medium text-emerald-500">
+                                                {formatCurrency(transaction.amount)}
+                                            </span>
+                                        </td>
+                                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-right">
+                                            <DropdownMenu
+                                                trigger={
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        className="h-8 w-8 text-muted-foreground hover:text-white"
+                                                    >
+                                                        <MoreHorizontal className="h-4 w-4" />
+                                                    </Button>
+                                                }
+                                            >
+                                                <DropdownMenuItem
+                                                    onClick={() => handleEdit(transaction)}
+                                                    className="cursor-pointer"
+                                                >
+                                                    <Pencil className="mr-2 h-4 w-4" />
+                                                    Editar
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    className="text-red-500 focus:text-red-500 cursor-pointer"
+                                                    onClick={() => handleDelete(transaction.id)}
+                                                    variant="destructive"
+                                                >
+                                                    <Trash2 className="mr-2 h-4 w-4" />
+                                                    Excluir
+                                                </DropdownMenuItem>
+                                            </DropdownMenu>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={5} className="h-24 text-center align-middle text-muted-foreground">
+                                        Nenhuma receita encontrada.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -155,6 +207,17 @@ export function IncomeTable({ transactions, currency = 'BRL', options }: IncomeT
                     accounts={options.accounts}
                 />
             )}
+
+            <ConfirmDialog
+                isOpen={!!deletingTransactionId}
+                onClose={() => setDeletingTransactionId(null)}
+                onConfirm={confirmDelete}
+                title="Excluir Receita"
+                description="Tem certeza que deseja excluir esta receita? Esta ação não pode ser desfeita."
+                confirmText="Excluir"
+                cancelText="Cancelar"
+                variant="danger"
+            />
         </div>
     )
 }

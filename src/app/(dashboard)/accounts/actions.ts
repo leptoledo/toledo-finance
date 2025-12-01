@@ -49,14 +49,19 @@ export async function updateAccount(accountId: string, formData: FormData) {
 
     const name = formData.get('name') as string
     const type = formData.get('type') as string
+    const balance = parseFloat(formData.get('balance') as string)
 
     if (!name || !type) {
         return { error: 'Nome e tipo são obrigatórios' }
     }
 
+    if (isNaN(balance)) {
+        return { error: 'Saldo inválido' }
+    }
+
     const { error } = await supabase
         .from('accounts')
-        .update({ name, type })
+        .update({ name, type, balance })
         .eq('id', accountId)
         .eq('user_id', user.id)
 

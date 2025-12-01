@@ -64,7 +64,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                 <div className="relative p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 flex-1">
                             <div className={`p-3 rounded-xl shadow-lg ${isOverBudget
                                 ? 'bg-gradient-to-br from-red-500 to-rose-600 shadow-red-500/50'
                                 : isNearLimit
@@ -77,13 +77,23 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                                     <span className="text-white text-lg">💰</span>
                                 )}
                             </div>
-                            <div>
-                                <h3 className="text-lg font-semibold text-white">
-                                    {budget.category?.name || 'Categoria'}
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-lg font-semibold text-white truncate">
+                                    {budget.name}
                                 </h3>
                                 <p className="text-xs text-muted-foreground">
-                                    Limite: {formattedLimit}
+                                    {budget.category?.name} • Limite: {formattedLimit}
                                 </p>
+                                {budget.description && (
+                                    <p className="text-xs text-gray-400 mt-1 line-clamp-1">
+                                        {budget.description}
+                                    </p>
+                                )}
+                                {budget.due_date && (
+                                    <p className="text-xs text-pink-400 mt-1">
+                                        Vence: {new Date(budget.due_date).toLocaleDateString('pt-BR')}
+                                    </p>
+                                )}
                             </div>
                         </div>
 
@@ -111,7 +121,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                     {/* Progress Bar */}
                     <div className="space-y-2 mb-4">
                         <div className="flex justify-between text-sm">
-                            <span className="text-gray-400">Gasto</span>
+                            <span className="text-gray-400">Pago</span>
                             <span className={`font-semibold ${isOverBudget ? 'text-red-400' : isNearLimit ? 'text-yellow-400' : 'text-pink-400'
                                 }`}>
                                 {percentage.toFixed(1)}%
@@ -133,7 +143,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <p className="text-xs text-gray-400 mb-1">Gasto</p>
+                            <p className="text-xs text-gray-400 mb-1">Pago</p>
                             <p className="text-lg font-bold text-white">{formattedSpent}</p>
                         </div>
                         <div>

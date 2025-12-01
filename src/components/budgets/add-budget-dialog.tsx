@@ -19,25 +19,6 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    const currentDate = new Date()
-    const currentMonth = currentDate.getMonth() + 1
-    const currentYear = currentDate.getFullYear()
-
-    const months = [
-        { value: 1, label: 'Janeiro' },
-        { value: 2, label: 'Fevereiro' },
-        { value: 3, label: 'Março' },
-        { value: 4, label: 'Abril' },
-        { value: 5, label: 'Maio' },
-        { value: 6, label: 'Junho' },
-        { value: 7, label: 'Julho' },
-        { value: 8, label: 'Agosto' },
-        { value: 9, label: 'Setembro' },
-        { value: 10, label: 'Outubro' },
-        { value: 11, label: 'Novembro' },
-        { value: 12, label: 'Dezembro' },
-    ]
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setIsSubmitting(true)
@@ -76,6 +57,29 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                         )}
 
                         <div className="space-y-2">
+                            <Label htmlFor="name" className="text-white">Nome do Orçamento</Label>
+                            <Input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="Ex: Orçamento de Aluguel Dezembro"
+                                required
+                                className="bg-gray-800/50 border-white/10"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="description" className="text-white">Descrição (opcional)</Label>
+                            <Input
+                                id="description"
+                                name="description"
+                                type="text"
+                                placeholder="Descreva o objetivo deste orçamento"
+                                className="bg-gray-800/50 border-white/10"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
                             <Label htmlFor="category_id" className="text-white">Categoria</Label>
                             <Select name="category_id" required>
                                 <SelectTrigger className="bg-gray-800/50 border-white/10">
@@ -108,36 +112,14 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="month" className="text-white">Mês</Label>
-                                <Select name="month" defaultValue={currentMonth.toString()} required>
-                                    <SelectTrigger className="bg-gray-800/50 border-white/10">
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {months.map((month) => (
-                                            <SelectItem key={month.value} value={month.value.toString()}>
-                                                {month.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="year" className="text-white">Ano</Label>
-                                <Select name="year" defaultValue={currentYear.toString()} required>
-                                    <SelectTrigger className="bg-gray-800/50 border-white/10">
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value={(currentYear - 1).toString()}>{currentYear - 1}</SelectItem>
-                                        <SelectItem value={currentYear.toString()}>{currentYear}</SelectItem>
-                                        <SelectItem value={(currentYear + 1).toString()}>{currentYear + 1}</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="due_date" className="text-white">Data Limite de Pagamento (opcional)</Label>
+                            <Input
+                                id="due_date"
+                                name="due_date"
+                                type="date"
+                                className="bg-gray-800/50 border-white/10"
+                            />
                         </div>
 
                         <div className="flex gap-3 pt-4">

@@ -1,30 +1,40 @@
 'use client'
 
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-interface CashFlowChartProps {
+interface MonthlyComparisonChartProps {
     data: {
-        name: string
+        month: string
         receita: number
         despesa: number
+        saldo: number
     }[]
     currency: string
 }
 
-export function CashFlowChart({ data, currency }: CashFlowChartProps) {
+export function MonthlyComparisonChart({ data, currency }: MonthlyComparisonChartProps) {
+    const formatCurrency = (value: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: currency,
+            notation: 'compact',
+            maximumFractionDigits: 1,
+        }).format(value)
+    }
+
     return (
-        <Card className="col-span-4 lg:col-span-3">
+        <Card className="col-span-4">
             <CardHeader>
-                <CardTitle>Fluxo de Caixa Mensal</CardTitle>
+                <CardTitle>Comparação Mensal</CardTitle>
             </CardHeader>
-            <CardContent className="pl-2">
-                <div className="h-[300px] w-full">
+            <CardContent>
+                <div className="h-[350px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={data}>
+                        <BarChart data={data}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
                             <XAxis
-                                dataKey="name"
+                                dataKey="month"
                                 stroke="#888888"
                                 fontSize={12}
                                 tickLine={false}
@@ -35,7 +45,7 @@ export function CashFlowChart({ data, currency }: CashFlowChartProps) {
                                 fontSize={12}
                                 tickLine={false}
                                 axisLine={false}
-                                tickFormatter={(value) => `${value}`}
+                                tickFormatter={formatCurrency}
                             />
                             <Tooltip
                                 contentStyle={{ backgroundColor: '#1f2937', border: 'none', borderRadius: '8px' }}
@@ -43,23 +53,25 @@ export function CashFlowChart({ data, currency }: CashFlowChartProps) {
                                 formatter={(value: number) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(value)}
                             />
                             <Legend verticalAlign="bottom" height={36} />
-                            <Line
-                                type="monotone"
+                            <Bar
                                 dataKey="receita"
-                                stroke="#10b981"
-                                strokeWidth={2}
-                                dot={false}
+                                fill="#10b981"
+                                radius={[8, 8, 0, 0]}
                                 name="Receita"
                             />
-                            <Line
-                                type="monotone"
+                            <Bar
                                 dataKey="despesa"
-                                stroke="#ef4444"
-                                strokeWidth={2}
-                                dot={false}
+                                fill="#ef4444"
+                                radius={[8, 8, 0, 0]}
                                 name="Despesa"
                             />
-                        </LineChart>
+                            <Bar
+                                dataKey="saldo"
+                                fill="#6366f1"
+                                radius={[8, 8, 0, 0]}
+                                name="Saldo"
+                            />
+                        </BarChart>
                     </ResponsiveContainer>
                 </div>
             </CardContent>

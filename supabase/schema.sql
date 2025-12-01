@@ -57,8 +57,8 @@ CREATE TABLE categories (
 
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view their own categories or defaults" ON categories
-  FOR SELECT USING (auth.uid() = user_id OR is_default = TRUE);
+CREATE POLICY "Users can view their own categories" ON categories
+  FOR SELECT USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert their own categories" ON categories
   FOR INSERT WITH CHECK (auth.uid() = user_id);
@@ -102,12 +102,13 @@ CREATE TABLE budgets (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
   category_id UUID REFERENCES categories(id) ON DELETE CASCADE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
   limit_amount DECIMAL(12, 2) NOT NULL CHECK (limit_amount > 0),
   spent_amount DECIMAL(12, 2) DEFAULT 0.00,
-  month INTEGER NOT NULL CHECK (month BETWEEN 1 AND 12),
-  year INTEGER NOT NULL,
+  due_date DATE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  UNIQUE(user_id, category_id, month, year)
+  UNIQUE(user_id, name)
 );
 
 ALTER TABLE budgets ENABLE ROW LEVEL SECURITY;

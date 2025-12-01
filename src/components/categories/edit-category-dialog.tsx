@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { updateCategory } from '@/app/(dashboard)/categories/actions'
 import { useToast } from '@/components/ui/toast'
+import { Ban } from 'lucide-react'
 
 interface EditCategoryDialogProps {
     isOpen: boolean
@@ -68,6 +69,22 @@ export function EditCategoryDialog({ isOpen, onClose, category }: EditCategoryDi
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-white">Ícone</label>
                     <div className="grid grid-cols-8 gap-2 p-4 bg-card border border-border rounded-lg max-h-48 overflow-y-auto">
+                        {/* No Icon Option */}
+                        <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, icon: '' })}
+                            className={`
+                                w-10 h-10 flex items-center justify-center text-2xl rounded-md
+                                transition-all hover:scale-110
+                                ${formData.icon === ''
+                                    ? 'bg-primary ring-2 ring-primary ring-offset-2 ring-offset-background'
+                                    : 'bg-background hover:bg-muted'
+                                }
+                            `}
+                            title="Sem ícone"
+                        >
+                            <Ban className="h-5 w-5 text-muted-foreground" />
+                        </button>
                         {CATEGORY_ICONS.map((icon) => (
                             <button
                                 key={icon}
@@ -112,7 +129,7 @@ export function EditCategoryDialog({ isOpen, onClose, category }: EditCategoryDi
                         disabled={isPending}
                         className="bg-white text-black hover:bg-gray-200"
                     >
-                        {isPending ? 'Salvar Alterações' : 'Salvar'}
+                        {isPending ? 'Salvando...' : 'Salvar Alterações'}
                     </Button>
                 </div>
             </form>

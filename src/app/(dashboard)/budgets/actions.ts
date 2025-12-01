@@ -11,28 +11,37 @@ export async function createBudget(formData: FormData) {
         return { error: 'Não autenticado' }
     }
 
+    const name = formData.get('name') as string
+    const description = formData.get('description') as string
     const categoryId = formData.get('category_id') as string
     const limitAmount = parseFloat(formData.get('limit_amount') as string)
-    const month = parseInt(formData.get('month') as string)
-    const year = parseInt(formData.get('year') as string)
+    const dueDate = formData.get('due_date') as string
 
-    if (!categoryId || !limitAmount || !month || !year) {
-        return { error: 'Todos os campos são obrigatórios' }
+    if (!name || !categoryId || !limitAmount) {
+        return { error: 'Nome, categoria e valor são obrigatórios' }
     }
 
     const { error } = await supabase
         .from('budgets')
         .insert({
             user_id: user.id,
+            name,
+            description: description || null,
             category_id: categoryId,
             limit_amount: limitAmount,
-            month,
-            year
+            due_date: dueDate || null
         })
 
     if (error) {
         console.error('Error creating budget:', error)
-        return { error: 'Erro ao criar orçamento. Verifique se já não existe um orçamento para esta categoria neste mês.' }
+        console.error('Error details:', JSON.stringify(error, null, 2))
+
+        // Check for unique constraint violation
+        if (error.code === '23505') {
+            return { error: 'Já existe um orçamento com este nome.' }
+        }
+
+        return { error: `Erro ao criar orçamento: ${error.message}` }
     }
 
     revalidatePath('/budgets')

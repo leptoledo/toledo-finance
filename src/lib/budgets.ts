@@ -4,10 +4,11 @@ export interface Budget {
     id: string
     user_id: string
     category_id: string
+    name: string
+    description: string | null
     limit_amount: number
     spent_amount: number
-    month: number
-    year: number
+    due_date: string | null
     created_at: string
     category?: {
         id: string
@@ -17,17 +18,13 @@ export interface Budget {
     }
 }
 
-export async function getBudgets(month?: number, year?: number) {
+export async function getBudgets() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
         return []
     }
-
-    const currentDate = new Date()
-    const targetMonth = month || currentDate.getMonth() + 1
-    const targetYear = year || currentDate.getFullYear()
 
     const { data, error } = await supabase
         .from('budgets')
@@ -36,8 +33,6 @@ export async function getBudgets(month?: number, year?: number) {
             category:categories(id, name, type, icon)
         `)
         .eq('user_id', user.id)
-        .eq('month', targetMonth)
-        .eq('year', targetYear)
         .order('created_at', { ascending: false })
 
     if (error) {
@@ -54,8 +49,8 @@ export async function getBudgets(month?: number, year?: number) {
     return data as Budget[]
 }
 
-export async function getBudgetSummary(month?: number, year?: number) {
-    const budgets = await getBudgets(month, year)
+export async function getBudgetSummary() {
+    const budgets = await getBudgets()
 
     const totalLimit = budgets.reduce((sum, b) => sum + Number(b.limit_amount), 0)
     const totalSpent = budgets.reduce((sum, b) => sum + Number(b.spent_amount), 0)

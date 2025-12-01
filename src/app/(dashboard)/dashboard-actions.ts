@@ -98,6 +98,83 @@ export async function getDashboardData() {
 
     const monthlyData = Array.from(monthlyDataMap.values())
 
+    // 6. Fetch Expenses by Category (current month)
+    const { data: expensesByCategory } = await supabase
+        .from('transactions')
+        .select(`
+            amount,
+            category:categories(name, icon)
+        `)
+        .eq('user_id', user.id)
+        .eq('type', 'expense')
+        .gte('date', firstDayOfMonth)
+        .lte('date', lastDayOfMonth)
+
+    const categoryMap = new Map<string, { name: string, value: number, icon?: string }>()
+
+    expensesByCategory?.forEach((t: any) => {
+        const category = Array.isArray(t.category) ? t.category[0] : t.category
+        const categoryName = category?.name || 'Sem categoria'
+        const categoryIcon = category?.icon || ''
+
+        if (categoryMap.has(categoryName)) {
+            categoryMap.get(categoryName)!.value += Number(t.amount)
+        } else {
+            categoryMap.set(categoryName, {
+                name: categoryName,
+                value: Number(t.amount),
+                icon: categoryIcon
+            })
+        }
+    })
+
+    const expensesByCategoryData = Array.from(categoryMap.values())
+        .sort((a, b) => b.value - a.value)
+
+    // 7. Monthly Comparison Data (last 6 months with balance)
+    const monthlyComparisonData = monthlyData.map(month => ({
+        month: month.name,
+        receita: month.receita,
+        despesa: month.despesa,
+        saldo: month.receita - month.despesa
+    }))
+
+    // 8. Balance Evolution (daily for last 30 days)
+    const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString()
+
+    const { data: recentTransactions } = await supabase
+        .from('transactions')
+        .select('amount, type, date')
+        .eq('user_id', user.id)
+        .gte('date', thirtyDaysAgo)
+        .order('date', { ascending: true })
+
+    // Calculate running balance
+    let runningBalance = totalBalance
+    const balanceByDate = new Map<string, number>()
+
+    // Start with current balance and work backwards
+    recentTransactions?.reverse().forEach(t => {
+        const dateStr = new Date(t.date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+        const amount = Number(t.amount)
+
+        if (t.type === 'income') {
+            runningBalance -= amount
+        } else {
+            runningBalance += amount
+        }
+
+        balanceByDate.set(dateStr, runningBalance)
+    })
+
+    // Add current balance
+    const todayStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+    balanceByDate.set(todayStr, totalBalance)
+
+    const balanceEvolutionData = Array.from(balanceByDate.entries())
+        .reverse()
+        .map(([date, saldo]) => ({ date, saldo }))
+
     return {
         currency,
         financials: {
@@ -109,6 +186,9 @@ export async function getDashboardData() {
             active: goals || [],
             totalCount: totalGoalsCount || 0
         },
-        chartData: monthlyData
+        chartData: monthlyData,
+        expensesByCategoryData,
+        monthlyComparisonData,
+        balanceEvolutionData
     }
 }

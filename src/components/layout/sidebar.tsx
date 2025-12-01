@@ -16,7 +16,9 @@ import {
     BarChart3,
     Upload,
     Settings,
-    Sparkles
+    Sparkles,
+    MessageSquare,
+    Shield
 } from 'lucide-react'
 
 const navigation = [
@@ -127,7 +129,45 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
             </div>
 
             {/* Settings at bottom */}
-            <div className="flex flex-col flex-shrink-0 border-t border-white/10 p-4">
+            <div className="flex flex-col flex-shrink-0 border-t border-white/10 p-4 space-y-1">
+                <Link
+                    href="/feedback"
+                    className={cn(
+                        'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
+                        pathname === '/feedback'
+                            ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-white shadow-lg shadow-blue-500/20 border border-blue-500/30'
+                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    )}
+                >
+                    {pathname === '/feedback' && (
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-cyan-600 rounded-r-full" />
+                    )}
+
+                    <div className={cn(
+                        'flex-shrink-0 transition-transform duration-200',
+                        pathname === '/feedback' ? 'scale-110' : 'group-hover:scale-110'
+                    )}>
+                        <MessageSquare
+                            className={cn(
+                                'h-5 w-5',
+                                pathname === '/feedback' ? 'text-blue-400' : 'text-gray-400 group-hover:text-white'
+                            )}
+                            aria-hidden="true"
+                        />
+                    </div>
+
+                    <span className={cn(
+                        'transition-all duration-200',
+                        pathname === '/feedback' ? 'font-semibold' : ''
+                    )}>
+                        Feedback
+                    </span>
+
+                    {pathname !== '/feedback' && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-cyan-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:via-cyan-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300" />
+                    )}
+                </Link>
+
                 <Link
                     href="/settings"
                     className={cn(
@@ -165,6 +205,47 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 rounded-xl transition-all duration-300" />
                     )}
                 </Link>
+
+                {/* Admin Link - Only for admins */}
+                {['leptoledo@hotmail.com', 'admin@financex.com'].includes(userEmail || '') && (
+                    <Link
+                        href="/admin/feedback"
+                        className={cn(
+                            'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
+                            pathname.startsWith('/admin')
+                                ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 text-white shadow-lg shadow-red-500/20 border border-red-500/30'
+                                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        )}
+                    >
+                        {pathname.startsWith('/admin') && (
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-red-500 to-orange-600 rounded-r-full" />
+                        )}
+
+                        <div className={cn(
+                            'flex-shrink-0 transition-transform duration-200',
+                            pathname.startsWith('/admin') ? 'scale-110' : 'group-hover:scale-110'
+                        )}>
+                            <Shield
+                                className={cn(
+                                    'h-5 w-5',
+                                    pathname.startsWith('/admin') ? 'text-red-400' : 'text-gray-400 group-hover:text-white'
+                                )}
+                                aria-hidden="true"
+                            />
+                        </div>
+
+                        <span className={cn(
+                            'transition-all duration-200',
+                            pathname.startsWith('/admin') ? 'font-semibold' : ''
+                        )}>
+                            Admin
+                        </span>
+
+                        {pathname !== '/admin' && (
+                            <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-orange-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:via-orange-500/5 group-hover:to-red-500/5 rounded-xl transition-all duration-300" />
+                        )}
+                    </Link>
+                )}
             </div>
         </div>
     )
