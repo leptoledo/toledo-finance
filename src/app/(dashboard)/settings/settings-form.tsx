@@ -123,7 +123,7 @@ export function SettingsForm({ profile }: { profile: any }) {
             <div className="space-y-4">
                 <h3 className="text-lg font-medium text-foreground">Aparência</h3>
                 <p className="text-sm text-muted-foreground">
-                    Escolha como o FinanceX deve aparecer para você.
+                    Escolha como o LCTNET deve aparecer para você.
                 </p>
                 {!mounted ? (
                     <div className="flex items-center gap-4">

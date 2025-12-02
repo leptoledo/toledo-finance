@@ -25,10 +25,10 @@ export function MobileHeader({ userProfile, userEmail }: MobileHeaderProps) {
                     <Menu className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <div className="flex items-center gap-2 flex-1">
-                    <div className="p-1.5 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
+                    <div className="p-1.5 rounded-lg bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
                         <Sparkles className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-lg font-bold gradient-text">FinanceX</span>
+                    <span className="text-lg font-bold gradient-text">LCTNET</span>
                 </div>
             </div>
 

@@ -56,7 +56,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                             <Sparkles className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-2xl font-bold gradient-text">FinanceX</h1>
+                            <h1 className="text-2xl font-bold gradient-text">LCTNET</h1>
                             <p className="text-xs text-muted-foreground">Suas finanças sob controle</p>
                         </div>
                     </div>

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FinanceX - Suas finanças sob controle",
+  title: "LCTNET - Suas finanças sob controle",
   description: "Gerencie suas finanças pessoais de forma simples e eficiente.",
 };
 
