@@ -1,5 +1,6 @@
 'use client'
 
+import { memo, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -38,12 +39,14 @@ const navigation = [
 interface SidebarProps {
     userProfile: any
     userEmail?: string
+    onNavigate?: () => void
 }
 
-export function Sidebar({ userProfile, userEmail }: SidebarProps) {
+function SidebarComponent({ userProfile, userEmail, onNavigate }: SidebarProps) {
     const pathname = usePathname()
-    // Formata o nome do usuário com prioridade: full_name > email formatado > 'Usuário'
-    const getFormattedUserName = () => {
+
+    // Memoiza o nome do usuário para evitar recalcular em cada render
+    const userName = useMemo(() => {
         if (userProfile?.full_name) {
             return userProfile.full_name
         }
@@ -57,8 +60,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                 .join(' ')
         }
         return 'Usuário'
-    }
-    const userName = getFormattedUserName()
+    }, [userProfile?.full_name, userEmail])
 
     return (
         <div className="flex h-full w-72 flex-col glass border-r border-white/10 animate-slide-in">
@@ -101,6 +103,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                             <Link
                                 key={item.name}
                                 href={item.href}
+                                onClick={onNavigate}
                                 className={cn(
                                     'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                                     isActive
@@ -149,6 +152,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
             <div className="flex flex-col shrink-0 border-t border-white/10 p-4 space-y-1">
                 <Link
                     href="/feedback"
+                    onClick={onNavigate}
                     className={cn(
                         'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                         pathname === '/feedback'
@@ -187,6 +191,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
 
                 <Link
                     href="/settings"
+                    onClick={onNavigate}
                     className={cn(
                         'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                         pathname === '/settings'
@@ -227,6 +232,7 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                 {['leptoledo@hotmail.com', 'admin@financex.com'].includes(userEmail || '') && (
                     <Link
                         href="/admin/feedback"
+                        onClick={onNavigate}
                         className={cn(
                             'group flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden',
                             pathname.startsWith('/admin')
@@ -286,3 +292,6 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
         </div>
     )
 }
+
+// Exporta o componente memoizado para evitar re-renders desnecessários
+export const Sidebar = memo(SidebarComponent)

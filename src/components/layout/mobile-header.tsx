@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Menu, X, Sparkles } from 'lucide-react'
 import { Sidebar } from './sidebar'
 
@@ -11,6 +11,11 @@ interface MobileHeaderProps {
 
 export function MobileHeader({ userProfile, userEmail }: MobileHeaderProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+    // Memoiza a função para evitar re-criar em cada render
+    const handleNavigate = useCallback(() => {
+        setIsSidebarOpen(false)
+    }, [])
 
     return (
         <>
@@ -43,7 +48,11 @@ export function MobileHeader({ userProfile, userEmail }: MobileHeaderProps) {
 
                     {/* Sidebar */}
                     <div className="fixed inset-y-0 left-0 w-72 overflow-y-auto animate-slide-in">
-                        <Sidebar userProfile={userProfile} userEmail={userEmail} />
+                        <Sidebar
+                            userProfile={userProfile}
+                            userEmail={userEmail}
+                            onNavigate={handleNavigate}
+                        />
                     </div>
                 </div>
             )}
