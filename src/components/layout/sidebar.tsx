@@ -41,7 +41,23 @@ interface SidebarProps {
 
 export function Sidebar({ userProfile, userEmail }: SidebarProps) {
     const pathname = usePathname()
-    const userName = userProfile?.full_name || userEmail?.split('@')[0] || 'Usuário'
+    // Formata o nome do usuário com prioridade: full_name > email formatado > 'Usuário'
+    const getFormattedUserName = () => {
+        if (userProfile?.full_name) {
+            return userProfile.full_name
+        }
+        if (userEmail) {
+            // Pega a parte antes do @ e formata
+            const emailName = userEmail.split('@')[0]
+            // Capitaliza primeira letra e substitui pontos/underscores por espaços
+            return emailName
+                .split(/[._-]/)
+                .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+                .join(' ')
+        }
+        return 'Usuário'
+    }
+    const userName = getFormattedUserName()
 
     return (
         <div className="flex h-full w-72 flex-col glass border-r border-white/10 animate-slide-in">

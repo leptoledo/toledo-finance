@@ -29,6 +29,12 @@ export async function updateProfile(formData: FormData) {
         updates.avatar_url = avatar_url
     }
 
+    // Atualiza full_name concatenando nome e sobrenome
+    const fullName = `${first_name || ''} ${last_name || ''}`.trim()
+    if (fullName) {
+        updates.full_name = fullName
+    }
+
     console.log('Dados recebidos:', { currency, first_name, last_name, avatar_url })
 
     const { data, error } = await supabase
