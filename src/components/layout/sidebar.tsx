@@ -18,7 +18,8 @@ import {
     Settings,
     Sparkles,
     MessageSquare,
-    Shield
+    Shield,
+    LogOut
 } from 'lucide-react'
 
 const navigation = [
@@ -262,6 +263,25 @@ export function Sidebar({ userProfile, userEmail }: SidebarProps) {
                         )}
                     </Link>
                 )}
+
+                {/* Logout Button */}
+                <button
+                    onClick={() => signOut()}
+                    className="group flex w-full items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden text-gray-400 hover:text-white hover:bg-white/5"
+                >
+                    <div className="shrink-0 transition-transform duration-200 group-hover:scale-110">
+                        <LogOut
+                            className="h-5 w-5 text-gray-400 group-hover:text-red-400"
+                            aria-hidden="true"
+                        />
+                    </div>
+
+                    <span className="transition-all duration-200">
+                        Sair
+                    </span>
+
+                    <div className="absolute inset-0 bg-linear-to-r from-red-500/0 via-orange-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:via-orange-500/5 group-hover:to-red-500/5 rounded-xl transition-all duration-300" />
+                </button>
             </div>
         </div>
     )

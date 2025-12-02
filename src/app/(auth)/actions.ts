@@ -31,7 +31,11 @@ export async function signup(formData: FormData) {
     const password = formData.get('password') as string
     const firstName = formData.get('firstName') as string
     const lastName = formData.get('lastName') as string
-    const phone = formData.get('phone') as string
+    const countryCode = formData.get('countryCode') as string
+    const phoneNumber = formData.get('phoneNumber') as string
+
+    // Concatena código do país e telefone se ambos existirem
+    const phone = (countryCode && phoneNumber) ? `${countryCode}${phoneNumber.replace(/\D/g, '')}` : ''
     const currency = formData.get('currency') as string
 
     const { error } = await supabase.auth.signUp({

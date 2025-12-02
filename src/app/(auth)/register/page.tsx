@@ -81,13 +81,44 @@ export default function RegisterPage() {
                     <label htmlFor="phone" className="block text-sm font-medium text-foreground">
                         Telefone
                     </label>
-                    <div className="mt-1">
+                    <div className="mt-1 flex rounded-md shadow-sm">
+                        <div className="relative flex items-stretch focus-within:z-10">
+                            <select
+                                id="countryCode"
+                                name="countryCode"
+                                className="block w-[110px] rounded-l-md border border-r-0 border-input bg-background px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+                                defaultValue="+55"
+                                onChange={(e) => {
+                                    const phoneInput = document.getElementById('phoneNumber') as HTMLInputElement
+                                    if (phoneInput) {
+                                        switch (e.target.value) {
+                                            case '+55': phoneInput.placeholder = '(11) 99999-9999'; break;
+                                            case '+1': phoneInput.placeholder = '(555) 123-4567'; break;
+                                            case '+351': phoneInput.placeholder = '912 345 678'; break;
+                                            case '+44': phoneInput.placeholder = '07700 900077'; break;
+                                            default: phoneInput.placeholder = '99999-9999';
+                                        }
+                                    }
+                                }}
+                            >
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+351">🇵🇹 +351</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+39">🇮🇹 +39</option>
+                                <option value="+54">🇦🇷 +54</option>
+                            </select>
+                        </div>
                         <input
-                            id="phone"
-                            name="phone"
+                            id="phoneNumber"
+                            name="phoneNumber"
                             type="tel"
                             autoComplete="tel"
-                            className="block w-full rounded-md border border-input bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+                            className="block w-full rounded-r-md border border-input bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+                            placeholder="(11) 99999-9999"
                         />
                     </div>
                 </div>
