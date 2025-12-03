@@ -39,8 +39,8 @@ export default function AuthLayout({
                 <div className="absolute inset-0 bg-zinc-900" />
 
                 {/* Background com gradiente sutil e efeitos */}
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-background to-background" />
-                <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-indigo-900/20 via-background to-background" />
+                <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent" />
 
                 <div className="relative z-20 flex items-center text-lg font-medium">
                     <Sparkles className="mr-2 h-6 w-6" />
