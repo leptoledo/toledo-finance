@@ -11,7 +11,7 @@ export default function AuthLayout({
         <div className="min-h-screen w-full lg:grid lg:grid-cols-2">
             {/* Lado Esquerdo - Formulário */}
             <div className="flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-background">
-                <div className="mx-auto w-full max-w-sm lg:w-96">
+                <div className="mx-auto w-full max-w-[450px] lg:w-[450px]">
                     <div className="mb-10">
                         <div className="flex items-center gap-2">
                             <div className="p-2 rounded-lg bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
