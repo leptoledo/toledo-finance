@@ -39,11 +39,11 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[500px] glass border-pink-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-rose-500/5 to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-linear-to-br from-pink-500/5 via-rose-500/5 to-transparent rounded-lg" />
                 <div className="relative">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold">
-                            <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
                                 Novo Orçamento
                             </span>
                         </DialogTitle>
@@ -134,7 +134,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                             </Button>
                             <Button
                                 type="submit"
-                                className="flex-1 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-lg shadow-pink-500/50"
+                                className="flex-1 bg-linear-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-lg shadow-pink-500/50"
                                 disabled={isSubmitting}
                             >
                                 {isSubmitting ? (

@@ -30,7 +30,7 @@ export function BudgetsView({ budgets, summary, categories }: BudgetsViewProps) 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                        <span className="bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
                             Orçamentos
                         </span>
                     </h2>
@@ -40,7 +40,7 @@ export function BudgetsView({ budgets, summary, categories }: BudgetsViewProps) 
                 </div>
                 <Button
                     onClick={() => setIsAddDialogOpen(true)}
-                    className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-lg shadow-pink-500/50 transition-all hover-lift"
+                    className="w-full sm:w-auto bg-linear-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-lg shadow-pink-500/50 transition-all hover-lift"
                 >
                     <Plus className="mr-2 h-4 w-4" />
                     Novo Orçamento
@@ -64,9 +64,9 @@ export function BudgetsView({ budgets, summary, categories }: BudgetsViewProps) 
                 </div>
             ) : (
                 <div className="relative overflow-hidden rounded-2xl glass border border-pink-500/20 p-12">
-                    <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-rose-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-pink-500/5 via-rose-500/5 to-transparent" />
                     <div className="relative text-center space-y-4">
-                        <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 shadow-lg shadow-pink-500/50">
+                        <div className="inline-flex p-4 rounded-2xl bg-linear-to-br from-pink-500 to-rose-600 shadow-lg shadow-pink-500/50">
                             <Plus className="h-12 w-12 text-white" />
                         </div>
                         <h3 className="text-xl font-semibold text-white">Nenhum Orçamento Criado</h3>

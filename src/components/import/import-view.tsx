@@ -119,7 +119,7 @@ export function ImportView({ categories }: ImportViewProps) {
             {/* Header */}
             <div>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                    <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                         Importar Transações
                     </span>
                 </h2>
@@ -133,7 +133,7 @@ export function ImportView({ categories }: ImportViewProps) {
                 <div className="space-y-6">
                     {/* Instructions */}
                     <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20 p-6">
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                         <div className="relative space-y-4">
                             <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                                 <FileText className="h-5 w-5 text-cyan-400" />
@@ -163,9 +163,9 @@ export function ImportView({ categories }: ImportViewProps) {
 
                     {/* Upload Area */}
                     <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20 p-12">
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                         <div className="relative text-center space-y-6">
-                            <div className="inline-flex p-6 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/50">
+                            <div className="inline-flex p-6 rounded-2xl bg-linear-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/50">
                                 <Upload className="h-16 w-16 text-white" />
                             </div>
 
@@ -199,7 +199,7 @@ export function ImportView({ categories }: ImportViewProps) {
                                     <Button
                                         onClick={handleUpload}
                                         disabled={isProcessing}
-                                        className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
+                                        className="bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
                                     >
                                         {isProcessing ? 'Processando...' : 'Processar Arquivo'}
                                     </Button>
@@ -242,9 +242,9 @@ export function ImportView({ categories }: ImportViewProps) {
             {/* Success Step */}
             {step === 'success' && (
                 <div className="relative overflow-hidden rounded-2xl glass border border-green-500/20 p-12">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-green-500/5 via-emerald-500/5 to-transparent" />
                     <div className="relative text-center space-y-6">
-                        <div className="inline-flex p-6 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
+                        <div className="inline-flex p-6 rounded-2xl bg-linear-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
                             <CheckCircle className="h-16 w-16 text-white" />
                         </div>
 
@@ -265,7 +265,7 @@ export function ImportView({ categories }: ImportViewProps) {
                             </Button>
                             <Button
                                 onClick={() => window.location.href = '/dashboard'}
-                                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg shadow-green-500/50"
+                                className="bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg shadow-green-500/50"
                             >
                                 Ir para Dashboard
                             </Button>

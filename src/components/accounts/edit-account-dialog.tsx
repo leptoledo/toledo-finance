@@ -40,11 +40,11 @@ export function EditAccountDialog({ account, isOpen, onClose }: EditAccountDialo
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[500px] glass border-yellow-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-amber-500/5 to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-linear-to-br from-yellow-500/5 via-amber-500/5 to-transparent rounded-lg" />
                 <div className="relative">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold">
-                            <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
                                 Editar Conta
                             </span>
                         </DialogTitle>
@@ -132,7 +132,7 @@ export function EditAccountDialog({ account, isOpen, onClose }: EditAccountDialo
                             </Button>
                             <Button
                                 type="submit"
-                                className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white shadow-lg shadow-yellow-500/50"
+                                className="flex-1 bg-linear-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white shadow-lg shadow-yellow-500/50"
                                 disabled={isSubmitting}
                             >
                                 {isSubmitting ? (

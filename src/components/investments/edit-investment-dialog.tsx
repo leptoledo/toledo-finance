@@ -47,11 +47,11 @@ export function EditInvestmentDialog({ investment, isOpen, onClose }: EditInvest
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[500px] glass border-purple-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-pink-500/5 to-transparent rounded-lg" />
                 <div className="relative">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold">
-                            <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                                 Editar Investimento
                             </span>
                         </DialogTitle>
@@ -121,7 +121,7 @@ export function EditInvestmentDialog({ investment, isOpen, onClose }: EditInvest
                             </Button>
                             <Button
                                 type="submit"
-                                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
+                                className="flex-1 bg-linear-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
                                 disabled={isSubmitting}
                             >
                                 {isSubmitting ? (

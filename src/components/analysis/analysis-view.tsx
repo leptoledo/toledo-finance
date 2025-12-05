@@ -28,7 +28,7 @@ export function AnalysisView({ data }: AnalysisViewProps) {
             {/* Header */}
             <div>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                    <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
                         Análise Financeira
                     </span>
                 </h2>
@@ -41,10 +41,10 @@ export function AnalysisView({ data }: AnalysisViewProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Total Income */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-green-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-green-500/10 via-emerald-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
                                 <TrendingUp className="h-6 w-6 text-white" />
                             </div>
                             <div className="text-xs font-medium text-green-400 bg-green-500/10 px-3 py-1 rounded-full">
@@ -57,15 +57,15 @@ export function AnalysisView({ data }: AnalysisViewProps) {
                             <p className="text-xs text-muted-foreground">Média: {formatCurrency(data.averageMonthlyIncome)}/mês</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-green-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-green-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Total Expenses */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-red-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 via-rose-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-red-500/10 via-rose-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 shadow-lg shadow-red-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-red-500 to-rose-600 shadow-lg shadow-red-500/50">
                                 <TrendingDown className="h-6 w-6 text-white" />
                             </div>
                             <div className="text-xs font-medium text-red-400 bg-red-500/10 px-3 py-1 rounded-full">
@@ -78,15 +78,15 @@ export function AnalysisView({ data }: AnalysisViewProps) {
                             <p className="text-xs text-muted-foreground">Média: {formatCurrency(data.averageMonthlyExpenses)}/mês</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-red-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-red-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Net Balance */}
                 <div className={`group relative overflow-hidden rounded-2xl glass border ${isPositiveBalance ? 'border-blue-500/20' : 'border-yellow-500/20'} hover-lift`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${isPositiveBalance ? 'from-blue-500/10 via-cyan-500/5' : 'from-yellow-500/10 via-amber-500/5'} to-transparent`} />
+                    <div className={`absolute inset-0 bg-linear-to-br ${isPositiveBalance ? 'from-blue-500/10 via-cyan-500/5' : 'from-yellow-500/10 via-amber-500/5'} to-transparent`} />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${isPositiveBalance ? 'from-blue-500 to-cyan-600 shadow-blue-500/50' : 'from-yellow-500 to-amber-600 shadow-yellow-500/50'} shadow-lg`}>
+                            <div className={`p-3 rounded-xl bg-linear-to-br ${isPositiveBalance ? 'from-blue-500 to-cyan-600 shadow-blue-500/50' : 'from-yellow-500 to-amber-600 shadow-yellow-500/50'} shadow-lg`}>
                                 <DollarSign className="h-6 w-6 text-white" />
                             </div>
                             <div className={`text-xs font-medium ${isPositiveBalance ? 'text-blue-400 bg-blue-500/10' : 'text-yellow-400 bg-yellow-500/10'} px-3 py-1 rounded-full`}>
@@ -103,7 +103,7 @@ export function AnalysisView({ data }: AnalysisViewProps) {
                             </p>
                         </div>
                     </div>
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${isPositiveBalance ? 'from-blue-500/5' : 'from-yellow-500/5'} to-transparent pointer-events-none`} />
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br ${isPositiveBalance ? 'from-blue-500/5' : 'from-yellow-500/5'} to-transparent pointer-events-none`} />
                 </div>
             </div>
 
@@ -111,10 +111,10 @@ export function AnalysisView({ data }: AnalysisViewProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Monthly Trend Chart */}
                 <div className="relative overflow-hidden rounded-2xl glass border border-indigo-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-indigo-500/5 via-purple-500/5 to-transparent" />
                     <div className="relative">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/50">
                                 <BarChart3 className="h-6 w-6 text-white" />
                             </div>
                             <div>
@@ -128,10 +128,10 @@ export function AnalysisView({ data }: AnalysisViewProps) {
 
                 {/* Category Pie Chart */}
                 <div className="relative overflow-hidden rounded-2xl glass border border-purple-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-pink-500/5 to-transparent" />
                     <div className="relative">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/50">
                                 <PieChart className="h-6 w-6 text-white" />
                             </div>
                             <div>
@@ -147,10 +147,10 @@ export function AnalysisView({ data }: AnalysisViewProps) {
             {/* Top Category */}
             {data.topExpenseCategory && (
                 <div className="relative overflow-hidden rounded-2xl glass border border-orange-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-amber-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-orange-500/5 via-amber-500/5 to-transparent" />
                     <div className="relative">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
                                 <Percent className="h-6 w-6 text-white" />
                             </div>
                             <div>

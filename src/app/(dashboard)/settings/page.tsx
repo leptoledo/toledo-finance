@@ -22,7 +22,7 @@ export default async function SettingsPage() {
         <div className="space-y-8 animate-fade-in">
             <div>
                 <h3 className="text-3xl sm:text-4xl font-bold mb-2">
-                    <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
                         Configurações
                     </span>
                 </h3>
@@ -32,12 +32,12 @@ export default async function SettingsPage() {
             </div>
 
             <div className="relative overflow-hidden rounded-2xl glass border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-500/5 via-slate-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-gray-500/5 via-slate-500/5 to-transparent" />
                 <div className="relative p-6 sm:p-8">
                     <div className="md:grid md:grid-cols-3 md:gap-8">
                         <div className="md:col-span-1">
                             <div className="flex items-start gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-gradient-to-br from-gray-500 to-slate-600 shadow-lg shadow-gray-500/50">
+                                <div className="p-2 rounded-lg bg-linear-to-br from-gray-500 to-slate-600 shadow-lg shadow-gray-500/50">
                                     <Settings className="h-5 w-5 text-white" />
                                 </div>
                                 <div>

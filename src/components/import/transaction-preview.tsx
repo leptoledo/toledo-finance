@@ -41,7 +41,7 @@ export function TransactionPreview({ transactions, onContinue, onCancel }: Trans
             {/* Summary */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                     <div className="relative">
                         <p className="text-sm font-medium text-gray-400 mb-2">Total de Transações</p>
                         <p className="text-3xl font-bold text-cyan-400">{transactions.length}</p>
@@ -49,7 +49,7 @@ export function TransactionPreview({ transactions, onContinue, onCancel }: Trans
                 </div>
 
                 <div className="relative overflow-hidden rounded-2xl glass border border-green-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-green-500/5 via-emerald-500/5 to-transparent" />
                     <div className="relative">
                         <p className="text-sm font-medium text-gray-400 mb-2">Receitas</p>
                         <p className="text-3xl font-bold text-green-400">{formatCurrency(totalIncome)}</p>
@@ -57,7 +57,7 @@ export function TransactionPreview({ transactions, onContinue, onCancel }: Trans
                 </div>
 
                 <div className="relative overflow-hidden rounded-2xl glass border border-red-500/20 p-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-rose-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-red-500/5 via-rose-500/5 to-transparent" />
                     <div className="relative">
                         <p className="text-sm font-medium text-gray-400 mb-2">Despesas</p>
                         <p className="text-3xl font-bold text-red-400">{formatCurrency(totalExpenses)}</p>
@@ -67,7 +67,7 @@ export function TransactionPreview({ transactions, onContinue, onCancel }: Trans
 
             {/* Transactions List */}
             <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                 <div className="relative p-6">
                     <h3 className="text-lg font-semibold text-white mb-4">
                         Preview das Transações
@@ -123,7 +123,7 @@ export function TransactionPreview({ transactions, onContinue, onCancel }: Trans
                 </Button>
                 <Button
                     onClick={onContinue}
-                    className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
+                    className="flex-1 bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
                 >
                     Continuar para Mapeamento
                     <ArrowRight className="ml-2 h-4 w-4" />

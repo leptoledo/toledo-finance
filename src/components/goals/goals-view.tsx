@@ -35,7 +35,7 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                        <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
                             Metas Financeiras
                         </span>
                     </h2>
@@ -45,7 +45,7 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                 </div>
                 <Button
                     onClick={() => setIsAddDialogOpen(true)}
-                    className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white shadow-lg shadow-orange-500/50 transition-all hover-lift"
+                    className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white shadow-lg shadow-orange-500/50 transition-all hover-lift"
                 >
                     <Plus className="mr-2 h-4 w-4" />
                     Nova Meta
@@ -56,10 +56,10 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Overall Progress */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-orange-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-amber-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-orange-500/10 via-amber-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
                                 <Target className="h-6 w-6 text-white" />
                             </div>
                             <div className="text-xs font-medium text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full">
@@ -73,20 +73,20 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                         </div>
                         <div className="mt-4 h-2 bg-gray-800 rounded-full overflow-hidden">
                             <div
-                                className="h-full bg-gradient-to-r from-orange-500 to-amber-600 transition-all duration-500"
+                                className="h-full bg-linear-to-r from-orange-500 to-amber-600 transition-all duration-500"
                                 style={{ width: `${Math.min(summary.overallProgress, 100)}%` }}
                             />
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-orange-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-orange-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Active Goals */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-blue-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-cyan-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg shadow-blue-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-blue-500 to-cyan-600 shadow-lg shadow-blue-500/50">
                                 <Clock className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -96,15 +96,15 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                             <p className="text-xs text-muted-foreground">em andamento</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-blue-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Completed Goals */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-green-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-green-500/10 via-emerald-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/50">
                                 <CheckCircle className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -114,15 +114,15 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                             <p className="text-xs text-muted-foreground">alcançadas</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-green-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-green-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Total Goals */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-purple-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 via-violet-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
                                 <DollarSign className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -132,7 +132,7 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                             <p className="text-xs text-muted-foreground">cadastradas</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-purple-500/5 to-transparent pointer-events-none" />
                 </div>
             </div>
 
@@ -150,9 +150,9 @@ export function GoalsView({ goals, summary }: GoalsViewProps) {
                 </div>
             ) : (
                 <div className="relative overflow-hidden rounded-2xl glass border border-orange-500/20 p-12">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-amber-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-orange-500/5 via-amber-500/5 to-transparent" />
                     <div className="relative text-center space-y-4">
-                        <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
+                        <div className="inline-flex p-4 rounded-2xl bg-linear-to-br from-orange-500 to-amber-600 shadow-lg shadow-orange-500/50">
                             <Target className="h-12 w-12 text-white" />
                         </div>
                         <h3 className="text-xl font-semibold text-white">Nenhuma Meta Criada</h3>

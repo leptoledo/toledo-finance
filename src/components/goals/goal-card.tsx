@@ -76,12 +76,12 @@ export function GoalCard({ goal }: GoalCardProps) {
 
     return (
         <div className={`group relative overflow-hidden rounded-2xl glass border ${colors.border} hover-lift`}>
-            <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} to-transparent`} />
+            <div className={`absolute inset-0 bg-linear-to-br ${colors.bg} to-transparent`} />
             <div className="relative p-6">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className={`p-3 rounded-xl bg-gradient-to-br ${colors.gradient} shadow-lg ${colors.shadow}`}>
+                        <div className={`p-3 rounded-xl bg-linear-to-br ${colors.gradient} shadow-lg ${colors.shadow}`}>
                             <Icon className="h-6 w-6 text-white" />
                         </div>
                         <div>
@@ -113,7 +113,7 @@ export function GoalCard({ goal }: GoalCardProps) {
                     </div>
                     <div className="h-3 bg-gray-800 rounded-full overflow-hidden">
                         <div
-                            className={`h-full bg-gradient-to-r ${colors.gradient} transition-all duration-500`}
+                            className={`h-full bg-linear-to-r ${colors.gradient} transition-all duration-500`}
                             style={{ width: `${Math.min(progress, 100)}%` }}
                         />
                     </div>
@@ -168,7 +168,7 @@ export function GoalCard({ goal }: GoalCardProps) {
                                 <Button
                                     size="sm"
                                     onClick={() => setShowUpdateInput(true)}
-                                    className={`flex-1 bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white`}
+                                    className={`flex-1 bg-linear-to-r ${colors.gradient} hover:opacity-90 text-white`}
                                 >
                                     Outro
                                 </Button>
@@ -187,7 +187,7 @@ export function GoalCard({ goal }: GoalCardProps) {
                                     size="sm"
                                     onClick={handleCustomUpdate}
                                     disabled={isUpdating || !updateAmount}
-                                    className={`bg-gradient-to-r ${colors.gradient} hover:opacity-90 text-white`}
+                                    className={`bg-linear-to-r ${colors.gradient} hover:opacity-90 text-white`}
                                 >
                                     OK
                                 </Button>
@@ -207,7 +207,7 @@ export function GoalCard({ goal }: GoalCardProps) {
                     </div>
                 )}
             </div>
-            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${colors.bg} to-transparent pointer-events-none`} />
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br ${colors.bg} to-transparent pointer-events-none`} />
         </div>
     )
 }

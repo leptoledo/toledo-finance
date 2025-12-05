@@ -68,12 +68,12 @@ export function InvestmentCard({ investment }: InvestmentCardProps) {
     return (
         <>
             <div className={`group relative overflow-hidden rounded-2xl glass border ${colors.border} hover-lift`}>
-                <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} to-transparent`} />
+                <div className={`absolute inset-0 bg-linear-to-br ${colors.bg} to-transparent`} />
                 <div className="relative p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${colors.gradient} shadow-lg ${colors.shadow}`}>
+                            <div className={`p-3 rounded-xl bg-linear-to-br ${colors.gradient} shadow-lg ${colors.shadow}`}>
                                 <Icon className="h-6 w-6 text-white" />
                             </div>
                             <div>
@@ -138,7 +138,7 @@ export function InvestmentCard({ investment }: InvestmentCardProps) {
                         </div>
                     )}
                 </div>
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${colors.bg} to-transparent pointer-events-none`} />
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br ${colors.bg} to-transparent pointer-events-none`} />
             </div>
 
             <EditInvestmentDialog

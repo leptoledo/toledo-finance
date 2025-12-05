@@ -55,10 +55,10 @@ export function BudgetCard({ budget }: BudgetCardProps) {
             <div className="group relative overflow-hidden rounded-2xl glass border border-pink-500/20 hover-lift">
                 {/* Background gradient */}
                 <div className={`absolute inset-0 ${isOverBudget
-                    ? 'bg-gradient-to-br from-red-500/10 via-rose-500/5 to-transparent'
+                    ? 'bg-linear-to-br from-red-500/10 via-rose-500/5 to-transparent'
                     : isNearLimit
-                        ? 'bg-gradient-to-br from-yellow-500/10 via-amber-500/5 to-transparent'
-                        : 'bg-gradient-to-br from-pink-500/10 via-rose-500/5 to-transparent'
+                        ? 'bg-linear-to-br from-yellow-500/10 via-amber-500/5 to-transparent'
+                        : 'bg-linear-to-br from-pink-500/10 via-rose-500/5 to-transparent'
                     }`} />
 
                 <div className="relative p-6">
@@ -66,10 +66,10 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                     <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3 flex-1">
                             <div className={`p-3 rounded-xl shadow-lg ${isOverBudget
-                                ? 'bg-gradient-to-br from-red-500 to-rose-600 shadow-red-500/50'
+                                ? 'bg-linear-to-br from-red-500 to-rose-600 shadow-red-500/50'
                                 : isNearLimit
-                                    ? 'bg-gradient-to-br from-yellow-500 to-amber-600 shadow-yellow-500/50'
-                                    : 'bg-gradient-to-br from-pink-500 to-rose-600 shadow-pink-500/50'
+                                    ? 'bg-linear-to-br from-yellow-500 to-amber-600 shadow-yellow-500/50'
+                                    : 'bg-linear-to-br from-pink-500 to-rose-600 shadow-pink-500/50'
                                 }`}>
                                 {budget.category?.icon ? (
                                     <span className="text-2xl">{budget.category.icon}</span>
@@ -130,10 +130,10 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                         <div className="h-3 bg-gray-800/50 rounded-full overflow-hidden">
                             <div
                                 className={`h-full transition-all duration-300 ${isOverBudget
-                                    ? 'bg-gradient-to-r from-red-500 to-rose-600'
+                                    ? 'bg-linear-to-r from-red-500 to-rose-600'
                                     : isNearLimit
-                                        ? 'bg-gradient-to-r from-yellow-500 to-amber-600'
-                                        : 'bg-gradient-to-r from-pink-500 to-rose-600'
+                                        ? 'bg-linear-to-r from-yellow-500 to-amber-600'
+                                        : 'bg-linear-to-r from-pink-500 to-rose-600'
                                     }`}
                                 style={{ width: `${Math.min(percentage, 100)}%` }}
                             />
@@ -179,7 +179,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
                 </div>
 
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-pink-500/5 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-pink-500/5 to-transparent pointer-events-none" />
             </div>
 
             <EditBudgetDialog

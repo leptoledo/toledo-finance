@@ -71,7 +71,7 @@ export function CategoryMapper({
         <div className="space-y-6">
             {/* Progress */}
             <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20 p-6">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                 <div className="relative">
                     <div className="flex items-center justify-between mb-2">
                         <p className="text-sm font-medium text-gray-400">Progresso do Mapeamento</p>
@@ -81,7 +81,7 @@ export function CategoryMapper({
                     </div>
                     <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                         <div
-                            className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500"
+                            className="h-full bg-linear-to-r from-cyan-500 to-blue-600 transition-all duration-500"
                             style={{ width: `${(mappedCount / totalDescriptions) * 100}%` }}
                         />
                     </div>
@@ -93,7 +93,7 @@ export function CategoryMapper({
 
             {/* Mapping List */}
             <div className="relative overflow-hidden rounded-2xl glass border border-cyan-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-blue-500/5 to-transparent" />
                 <div className="relative p-6">
                     <h3 className="text-lg font-semibold text-white mb-4">
                         Mapear Categorias
@@ -178,7 +178,7 @@ export function CategoryMapper({
                 <Button
                     onClick={onImport}
                     disabled={isProcessing || mappedCount === 0}
-                    className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
+                    className="flex-1 bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/50"
                 >
                     {isProcessing ? (
                         'Importando...'
