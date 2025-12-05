@@ -13,9 +13,10 @@ import { Loader2, TrendingUp, Building, Bitcoin, Home, Briefcase } from 'lucide-
 interface AddInvestmentDialogProps {
     isOpen: boolean
     onClose: () => void
+    accounts?: { id: string; name: string }[]
 }
 
-export function AddInvestmentDialog({ isOpen, onClose }: AddInvestmentDialogProps) {
+export function AddInvestmentDialog({ isOpen, onClose, accounts = [] }: AddInvestmentDialogProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
@@ -39,11 +40,11 @@ export function AddInvestmentDialog({ isOpen, onClose }: AddInvestmentDialogProp
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[550px] glass border-purple-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent rounded-lg" />
+                <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-pink-500/5 to-transparent rounded-lg" />
                 <div className="relative">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold">
-                            <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                                 Novo Investimento
                             </span>
                         </DialogTitle>
@@ -108,83 +109,103 @@ export function AddInvestmentDialog({ isOpen, onClose }: AddInvestmentDialogProp
                             </Select>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="amount_invested" className="text-white">Valor Investido</Label>
+                                <Label htmlFor="account_id" className="text-white">Conta de Origem (Para débito)</Label>
+                                <Select name="account_id">
+                                    <SelectTrigger className="bg-gray-800/50 border-white/10">
+                                        <SelectValue placeholder="Selecione uma conta (Opcional)" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {accounts.map((account) => (
+                                            <SelectItem key={account.id} value={account.id}>
+                                                {account.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <p className="text-xs text-muted-foreground">
+                                    Se selecionada, o valor investido será descontado desta conta.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="amount_invested" className="text-white">Valor Investido</Label>
+                                    <Input
+                                        id="amount_invested"
+                                        name="amount_invested"
+                                        type="number"
+                                        step="0.01"
+                                        min="0.01"
+                                        placeholder="0.00"
+                                        required
+                                        className="bg-gray-800/50 border-white/10"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="current_value" className="text-white">Valor Atual</Label>
+                                    <Input
+                                        id="current_value"
+                                        name="current_value"
+                                        type="number"
+                                        step="0.01"
+                                        min="0"
+                                        placeholder="0.00"
+                                        required
+                                        className="bg-gray-800/50 border-white/10"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="purchase_date" className="text-white">Data de Compra</Label>
                                 <Input
-                                    id="amount_invested"
-                                    name="amount_invested"
-                                    type="number"
-                                    step="0.01"
-                                    min="0.01"
-                                    placeholder="0.00"
+                                    id="purchase_date"
+                                    name="purchase_date"
+                                    type="date"
                                     required
                                     className="bg-gray-800/50 border-white/10"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="current_value" className="text-white">Valor Atual</Label>
-                                <Input
-                                    id="current_value"
-                                    name="current_value"
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    placeholder="0.00"
-                                    required
-                                    className="bg-gray-800/50 border-white/10"
+                                <Label htmlFor="notes" className="text-white">Observações (Opcional)</Label>
+                                <Textarea
+                                    id="notes"
+                                    name="notes"
+                                    placeholder="Adicione notas sobre este investimento..."
+                                    rows={3}
+                                    className="bg-gray-800/50 border-white/10 resize-none"
                                 />
                             </div>
-                        </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="purchase_date" className="text-white">Data de Compra</Label>
-                            <Input
-                                id="purchase_date"
-                                name="purchase_date"
-                                type="date"
-                                required
-                                className="bg-gray-800/50 border-white/10"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="notes" className="text-white">Observações (Opcional)</Label>
-                            <Textarea
-                                id="notes"
-                                name="notes"
-                                placeholder="Adicione notas sobre este investimento..."
-                                rows={3}
-                                className="bg-gray-800/50 border-white/10 resize-none"
-                            />
-                        </div>
-
-                        <div className="flex gap-3 pt-4">
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={onClose}
-                                className="flex-1 border-white/10 hover:bg-white/5"
-                                disabled={isSubmitting}
-                            >
-                                Cancelar
-                            </Button>
-                            <Button
-                                type="submit"
-                                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
-                                disabled={isSubmitting}
-                            >
-                                {isSubmitting ? (
-                                    <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                        Criando...
-                                    </>
-                                ) : (
-                                    'Criar Investimento'
-                                )}
-                            </Button>
-                        </div>
+                            <div className="flex gap-3 pt-4">
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    onClick={onClose}
+                                    className="flex-1 border-white/10 hover:bg-white/5"
+                                    disabled={isSubmitting}
+                                >
+                                    Cancelar
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    className="flex-1 bg-linear-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Criando...
+                                        </>
+                                    ) : (
+                                        'Criar Investimento'
+                                    )}
+                                </Button>
+                            </div>
                     </form>
                 </div>
             </DialogContent>

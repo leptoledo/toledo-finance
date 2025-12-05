@@ -10,9 +10,10 @@ import { AddInvestmentDialog } from './add-investment-dialog'
 interface InvestmentsViewProps {
     investments: Investment[]
     summary: InvestmentSummary
+    accounts: { id: string; name: string }[]
 }
 
-export function InvestmentsView({ investments, summary }: InvestmentsViewProps) {
+export function InvestmentsView({ investments, summary, accounts }: InvestmentsViewProps) {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
     const formatCurrency = (value: number) => {
@@ -35,7 +36,7 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                        <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                             Investimentos
                         </span>
                     </h2>
@@ -45,7 +46,7 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                 </div>
                 <Button
                     onClick={() => setIsAddDialogOpen(true)}
-                    className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50 transition-all hover-lift"
+                    className="w-full sm:w-auto bg-linear-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50 transition-all hover-lift"
                 >
                     <Plus className="mr-2 h-4 w-4" />
                     Novo Investimento
@@ -56,10 +57,10 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Total Invested */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-blue-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-cyan-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg shadow-blue-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-blue-500 to-cyan-600 shadow-lg shadow-blue-500/50">
                                 <Wallet className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -68,15 +69,15 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                             <p className="text-3xl font-bold text-blue-400">{formatCurrency(summary.totalInvested)}</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-blue-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Current Value */}
                 <div className="group relative overflow-hidden rounded-2xl glass border border-purple-500/20 hover-lift">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-violet-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 via-violet-500/5 to-transparent" />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
+                            <div className="p-3 rounded-xl bg-linear-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
                                 <DollarSign className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -85,15 +86,15 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                             <p className="text-3xl font-bold text-purple-400">{formatCurrency(summary.currentValue)}</p>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-purple-500/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Total Return */}
                 <div className={`group relative overflow-hidden rounded-2xl glass border ${isPositiveReturn ? 'border-green-500/20' : 'border-red-500/20'} hover-lift`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${isPositiveReturn ? 'from-green-500/10 via-emerald-500/5' : 'from-red-500/10 via-rose-500/5'} to-transparent`} />
+                    <div className={`absolute inset-0 bg-linear-to-br ${isPositiveReturn ? 'from-green-500/10 via-emerald-500/5' : 'from-red-500/10 via-rose-500/5'} to-transparent`} />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${isPositiveReturn ? 'from-green-500 to-emerald-600 shadow-green-500/50' : 'from-red-500 to-rose-600 shadow-red-500/50'} shadow-lg`}>
+                            <div className={`p-3 rounded-xl bg-linear-to-br ${isPositiveReturn ? 'from-green-500 to-emerald-600 shadow-green-500/50' : 'from-red-500 to-rose-600 shadow-red-500/50'} shadow-lg`}>
                                 <TrendingUp className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -104,15 +105,15 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                             </p>
                         </div>
                     </div>
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${isPositiveReturn ? 'from-green-500/5' : 'from-red-500/5'} to-transparent pointer-events-none`} />
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br ${isPositiveReturn ? 'from-green-500/5' : 'from-red-500/5'} to-transparent pointer-events-none`} />
                 </div>
 
                 {/* Return Percentage */}
                 <div className={`group relative overflow-hidden rounded-2xl glass border ${isPositiveReturn ? 'border-emerald-500/20' : 'border-orange-500/20'} hover-lift`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${isPositiveReturn ? 'from-emerald-500/10 via-green-500/5' : 'from-orange-500/10 via-amber-500/5'} to-transparent`} />
+                    <div className={`absolute inset-0 bg-linear-to-br ${isPositiveReturn ? 'from-emerald-500/10 via-green-500/5' : 'from-orange-500/10 via-amber-500/5'} to-transparent`} />
                     <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${isPositiveReturn ? 'from-emerald-500 to-green-600 shadow-emerald-500/50' : 'from-orange-500 to-amber-600 shadow-orange-500/50'} shadow-lg`}>
+                            <div className={`p-3 rounded-xl bg-linear-to-br ${isPositiveReturn ? 'from-emerald-500 to-green-600 shadow-emerald-500/50' : 'from-orange-500 to-amber-600 shadow-orange-500/50'} shadow-lg`}>
                                 <Percent className="h-6 w-6 text-white" />
                             </div>
                         </div>
@@ -123,7 +124,7 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                             </p>
                         </div>
                     </div>
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${isPositiveReturn ? 'from-emerald-500/5' : 'from-orange-500/5'} to-transparent pointer-events-none`} />
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br ${isPositiveReturn ? 'from-emerald-500/5' : 'from-orange-500/5'} to-transparent pointer-events-none`} />
                 </div>
             </div>
 
@@ -141,9 +142,9 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
                 </div>
             ) : (
                 <div className="relative overflow-hidden rounded-2xl glass border border-purple-500/20 p-12">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-pink-500/5 to-transparent" />
                     <div className="relative text-center space-y-4">
-                        <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/50">
+                        <div className="inline-flex p-4 rounded-2xl bg-linear-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/50">
                             <PieChart className="h-12 w-12 text-white" />
                         </div>
                         <h3 className="text-xl font-semibold text-white">Nenhum Investimento Cadastrado</h3>
@@ -158,6 +159,7 @@ export function InvestmentsView({ investments, summary }: InvestmentsViewProps) 
             <AddInvestmentDialog
                 isOpen={isAddDialogOpen}
                 onClose={() => setIsAddDialogOpen(false)}
+                accounts={accounts}
             />
         </div>
     )
