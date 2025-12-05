@@ -181,31 +181,33 @@ export function AddInvestmentDialog({ isOpen, onClose, accounts = [] }: AddInves
                                 />
                             </div>
 
-                            <div className="flex gap-3 pt-4">
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    onClick={onClose}
-                                    className="flex-1 border-white/10 hover:bg-white/5"
-                                    disabled={isSubmitting}
-                                >
-                                    Cancelar
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    className="flex-1 bg-linear-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Criando...
-                                        </>
-                                    ) : (
-                                        'Criar Investimento'
-                                    )}
-                                </Button>
-                            </div>
+                        </div>
+
+                        <div className="flex gap-3 pt-4">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={onClose}
+                                className="flex-1 border-white/10 hover:bg-white/5"
+                                disabled={isSubmitting}
+                            >
+                                Cancelar
+                            </Button>
+                            <Button
+                                type="submit"
+                                className="flex-1 bg-linear-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-lg shadow-purple-500/50"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Criando...
+                                    </>
+                                ) : (
+                                    'Criar Investimento'
+                                )}
+                            </Button>
+                        </div>
                     </form>
                 </div>
             </DialogContent>
