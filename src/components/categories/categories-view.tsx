@@ -61,7 +61,7 @@ export function CategoriesView({ categories, totalCount, currentPage }: Categori
 
             {/* Footer Note */}
             <div className="relative overflow-hidden rounded-2xl glass border border-purple-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-violet-500/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 via-violet-500/5 to-transparent" />
                 <div className="relative p-6">
                     <div className="flex items-start gap-3">
                         <div className="p-2 rounded-lg bg-purple-500/10 mt-0.5">
