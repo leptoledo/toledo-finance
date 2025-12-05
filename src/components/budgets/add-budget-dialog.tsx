@@ -12,7 +12,7 @@ import { Loader2 } from 'lucide-react'
 interface AddBudgetDialogProps {
     isOpen: boolean
     onClose: () => void
-    categories: Array<{ id: string; name: string; icon: string | null }>
+    categories: Array<{ id: string; name: string; icon: string | null; type: string }>
 }
 
 export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialogProps) {
@@ -36,6 +36,10 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
         }
     }
 
+    const [selectedType, setSelectedType] = useState<'income' | 'expense'>('expense')
+
+    const filteredCategories = categories.filter(c => c.type === selectedType)
+
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[500px] glass border-pink-500/20">
@@ -44,7 +48,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold">
                             <span className="bg-linear-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
-                                Novo Orçamento
+                                Novo Planejamento
                             </span>
                         </DialogTitle>
                     </DialogHeader>
@@ -56,13 +60,47 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                             </div>
                         )}
 
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="type" className="text-white">Tipo</Label>
+                                <Select
+                                    name="type"
+                                    value={selectedType}
+                                    onValueChange={(val: 'income' | 'expense') => setSelectedType(val)}
+                                >
+                                    <SelectTrigger className="bg-gray-800/50 border-white/10">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="expense">Despesa</SelectItem>
+                                        <SelectItem value="income">Receita</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="period" className="text-white">Período</Label>
+                                <Select name="period" defaultValue="monthly">
+                                    <SelectTrigger className="bg-gray-800/50 border-white/10">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="daily">Diário</SelectItem>
+                                        <SelectItem value="weekly">Semanal</SelectItem>
+                                        <SelectItem value="monthly">Mensal</SelectItem>
+                                        <SelectItem value="yearly">Anual</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
-                            <Label htmlFor="name" className="text-white">Nome do Orçamento</Label>
+                            <Label htmlFor="name" className="text-white">Nome do Planejamento</Label>
                             <Input
                                 id="name"
                                 name="name"
                                 type="text"
-                                placeholder="Ex: Orçamento de Aluguel Dezembro"
+                                placeholder="Ex: Aluguel, Salário, Supermercado"
                                 required
                                 className="bg-gray-800/50 border-white/10"
                             />
@@ -74,7 +112,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                                 id="description"
                                 name="description"
                                 type="text"
-                                placeholder="Descreva o objetivo deste orçamento"
+                                placeholder="Descreva o objetivo"
                                 className="bg-gray-800/50 border-white/10"
                             />
                         </div>
@@ -86,7 +124,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                                     <SelectValue placeholder="Selecione uma categoria" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {categories.map((category) => (
+                                    {filteredCategories.map((category) => (
                                         <SelectItem key={category.id} value={category.id}>
                                             <div className="flex items-center gap-2">
                                                 {category.icon && <span>{category.icon}</span>}
@@ -99,7 +137,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="limit_amount" className="text-white">Valor do Limite</Label>
+                            <Label htmlFor="limit_amount" className="text-white">Valor Planejado</Label>
                             <Input
                                 id="limit_amount"
                                 name="limit_amount"
@@ -108,16 +146,6 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                                 min="0.01"
                                 placeholder="0.00"
                                 required
-                                className="bg-gray-800/50 border-white/10"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="due_date" className="text-white">Data Limite de Pagamento (opcional)</Label>
-                            <Input
-                                id="due_date"
-                                name="due_date"
-                                type="date"
                                 className="bg-gray-800/50 border-white/10"
                             />
                         </div>
@@ -143,7 +171,7 @@ export function AddBudgetDialog({ isOpen, onClose, categories }: AddBudgetDialog
                                         Criando...
                                     </>
                                 ) : (
-                                    'Criar Orçamento'
+                                    'Criar Planejamento'
                                 )}
                             </Button>
                         </div>

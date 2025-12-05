@@ -15,7 +15,8 @@ export async function createBudget(formData: FormData) {
     const description = formData.get('description') as string
     const categoryId = formData.get('category_id') as string
     const limitAmount = parseFloat(formData.get('limit_amount') as string)
-    const dueDate = formData.get('due_date') as string
+    const type = formData.get('type') as string
+    const period = formData.get('period') as string
 
     if (!name || !categoryId || !limitAmount) {
         return { error: 'Nome, categoria e valor são obrigatórios' }
@@ -29,7 +30,8 @@ export async function createBudget(formData: FormData) {
             description: description || null,
             category_id: categoryId,
             limit_amount: limitAmount,
-            due_date: dueDate || null
+            type,
+            period
         })
 
     if (error) {

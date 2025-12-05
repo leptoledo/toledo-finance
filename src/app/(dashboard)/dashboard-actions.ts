@@ -39,13 +39,9 @@ export async function getDashboardData() {
         if (t.type === 'expense') totalExpense += Number(t.amount)
     })
 
-    // 3. Fetch Consolidated Balance (Sum of all accounts)
-    const { data: accounts } = await supabase
-        .from('accounts')
-        .select('balance')
-        .eq('user_id', user.id)
-
-    const totalBalance = accounts?.reduce((acc, curr) => acc + Number(curr.balance), 0) || 0
+    // 3. Calculate Remaining Balance (Income - Expense for the current month)
+    // The user requested "Saldo Remanescente" to reflect the value that was "already spent" relative to income.
+    const totalBalance = totalIncome - totalExpense
 
     // 4. Fetch Active Goals
     const { data: goals } = await supabase

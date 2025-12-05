@@ -11,8 +11,7 @@ export default async function BudgetsPage() {
     const supabase = await createClient()
     const { data: categories } = await supabase
         .from('categories')
-        .select('id, name, icon')
-        .eq('type', 'expense')
+        .select('id, name, icon, type')
         .order('name')
 
     return (

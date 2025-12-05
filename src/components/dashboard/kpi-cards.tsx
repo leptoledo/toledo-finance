@@ -95,7 +95,7 @@ export function KPICards({ currency, financials, goalsCount }: KPICardsProps) {
                     </div>
 
                     <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-400">Saldo Consolidado</p>
+                        <p className="text-sm font-medium text-gray-400">Saldo Remanescente</p>
                         <p className="text-3xl font-bold text-blue-400">{formatCurrency(financials.totalBalance)}</p>
                         <p className="text-xs text-muted-foreground">
                             Fluxo: <span className={cashFlow >= 0 ? 'text-green-400' : 'text-red-400'}>{formatCurrency(cashFlow)}</span>

@@ -48,13 +48,13 @@ export function BudgetSummary({
                             <PiggyBank className="h-6 w-6 text-white" />
                         </div>
                         <div className="text-xs font-medium text-pink-400 bg-pink-500/10 px-3 py-1 rounded-full">
-                            Limite Total
+                            Valor Planejado Total
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-400">Orçamento Total</p>
+                        <p className="text-sm font-medium text-gray-400">Total Planejado</p>
                         <p className="text-3xl font-bold text-pink-400">{formattedLimit}</p>
-                        <p className="text-xs text-muted-foreground">{budgetCount} orçamento(s) ativo(s)</p>
+                        <p className="text-xs text-muted-foreground">{budgetCount} plano(s) ativo(s)</p>
                     </div>
                 </div>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-pink-500/5 to-transparent pointer-events-none" />
@@ -69,13 +69,13 @@ export function BudgetSummary({
                             <TrendingDown className="h-6 w-6 text-white" />
                         </div>
                         <div className="text-xs font-medium text-red-400 bg-red-500/10 px-3 py-1 rounded-full">
-                            Pago
+                            Realizado
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-400">Total Pago</p>
+                        <p className="text-sm font-medium text-gray-400">Total Realizado</p>
                         <p className="text-3xl font-bold text-red-400">{formattedSpent}</p>
-                        <p className="text-xs text-muted-foreground">{percentageUsed.toFixed(1)}% do orçamento</p>
+                        <p className="text-xs text-muted-foreground">{percentageUsed.toFixed(1)}% do planejado</p>
                     </div>
                 </div>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-red-500/5 to-transparent pointer-events-none" />
@@ -116,7 +116,7 @@ export function BudgetSummary({
                             {isOverBudget ? `-${formattedRemaining}` : formattedRemaining}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                            {isOverBudget ? 'Acima do limite' : 'Dentro do orçamento'}
+                            {isOverBudget ? 'Acima do planejado' : 'Dentro do planejado'}
                         </p>
                     </div>
                 </div>
@@ -149,7 +149,7 @@ export function BudgetSummary({
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-400">Orçamentos Excedidos</p>
+                        <p className="text-sm font-medium text-gray-400">Planos Excedidos</p>
                         <p className={`text-3xl font-bold ${overBudgetCount > 0 ? 'text-yellow-400' : 'text-blue-400'
                             }`}>
                             {overBudgetCount}

@@ -3,11 +3,13 @@ import { createClient } from '@/utils/supabase/server'
 export interface Budget {
     id: string
     user_id: string
+    type: 'income' | 'expense'
+    period: 'daily' | 'weekly' | 'monthly' | 'yearly'
     category_id: string
     name: string
     description: string | null
     limit_amount: number
-    spent_amount: number
+    spent_amount?: number
     due_date: string | null
     created_at: string
     category?: {
