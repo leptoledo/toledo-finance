@@ -106,3 +106,32 @@ export async function deleteInvestment(id: string) {
     revalidatePath('/dashboard')
     return { success: true }
 }
+
+export async function updateInvestment(id: string, formData: FormData) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+        return { error: 'Não autenticado' }
+    }
+
+    const current_value = formData.get('current_value') as string
+    const notes = formData.get('notes') as string
+
+    const { error } = await supabase
+        .from('investments')
+        .update({
+            current_value: parseFloat(current_value),
+            notes: notes || null
+        })
+        .eq('id', id)
+        .eq('user_id', user.id)
+
+    if (error) {
+        return { error: error.message }
+    }
+
+    revalidatePath('/investments')
+    revalidatePath('/dashboard')
+    return { success: true }
+}
