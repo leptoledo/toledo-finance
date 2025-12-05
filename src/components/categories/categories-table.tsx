@@ -21,9 +21,11 @@ interface Category {
 
 interface CategoriesTableProps {
     categories: Category[]
+    totalCount: number
+    currentPage: number
 }
 
-export function CategoriesTable({ categories }: CategoriesTableProps) {
+export function CategoriesTable({ categories, totalCount, currentPage }: CategoriesTableProps) {
     const { showToast } = useToast()
     const [isPending, startTransition] = useTransition()
     const [editingCategory, setEditingCategory] = useState<Category | null>(null)
@@ -33,6 +35,16 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
     const customCategories = categories
 
     const router = useRouter()
+
+    const pageSize = 10
+    const totalPages = Math.ceil(totalCount / pageSize)
+
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(window.location.search)
+        params.set('page', page.toString())
+        router.push(`?${params.toString()}`)
+    }
+
     const handleDelete = (id: string) => {
         setDeletingCategoryId(id)
     }
@@ -132,6 +144,31 @@ export function CategoriesTable({ categories }: CategoriesTableProps) {
                     </table>
                 </div>
             </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="flex items-center justify-end space-x-2 py-4">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage <= 1}
+                    >
+                        Anterior
+                    </Button>
+                    <div className="text-sm font-medium">
+                        Página {currentPage} de {totalPages}
+                    </div>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage >= totalPages}
+                    >
+                        Próxima
+                    </Button>
+                </div>
+            )}
 
             {editingCategory && (
                 <EditCategoryDialog

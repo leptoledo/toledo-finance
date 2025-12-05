@@ -6,16 +6,32 @@ import { cn } from '@/lib/utils'
 interface DropdownMenuProps {
     trigger: React.ReactNode
     children: React.ReactNode
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 }
 
-export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
-    const [isOpen, setIsOpen] = React.useState(false)
+export function DropdownMenu({ trigger, children, open, onOpenChange }: DropdownMenuProps) {
+    const [internalOpen, setInternalOpen] = React.useState(false)
+    const isControlled = open !== undefined
+    const isOpen = isControlled ? open : internalOpen
     const dropdownRef = React.useRef<HTMLDivElement>(null)
+
+    const handleOpenChange = (newOpen: boolean) => {
+        if (!isControlled) {
+            setInternalOpen(newOpen)
+        }
+        onOpenChange?.(newOpen)
+    }
 
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setIsOpen(false)
+            const target = event.target as HTMLElement
+            if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+                // Prevent closing if clicking inside a Radix Select portal (which typically has role="listbox" or "option")
+                if (target.closest('[role="listbox"]') || target.closest('[role="option"]') || target.closest('[data-radix-select-viewport]')) {
+                    return
+                }
+                handleOpenChange(false)
             }
         }
 
@@ -30,11 +46,11 @@ export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
 
     return (
         <div className="relative inline-block" ref={dropdownRef}>
-            <div onClick={() => setIsOpen(!isOpen)}>
+            <div onClick={() => handleOpenChange(!isOpen)}>
                 {trigger}
             </div>
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md border border-border bg-card shadow-lg z-[100] animate-in fade-in-0 zoom-in-95">
+                <div className="absolute right-0 mt-2 min-w-48 w-auto rounded-md border border-border bg-card shadow-lg z-100 animate-in fade-in-0 zoom-in-95">
                     <div className="py-1">
                         {children}
                     </div>

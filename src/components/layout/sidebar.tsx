@@ -20,7 +20,8 @@ import {
     Sparkles,
     MessageSquare,
     Shield,
-    LogOut
+    LogOut,
+    Landmark
 } from 'lucide-react'
 
 const navigation = [
@@ -34,6 +35,7 @@ const navigation = [
     { name: 'Metas', href: '/goals', icon: Target, color: 'text-orange-400' },
     { name: 'Análise', href: '/analysis', icon: BarChart3, color: 'text-indigo-400' },
     { name: 'Importar', href: '/import', icon: Upload, color: 'text-teal-400' },
+    { name: 'Conectar Banco', href: '/connect-bank', icon: Landmark, color: 'text-blue-500' },
 ]
 
 interface SidebarProps {

@@ -103,6 +103,8 @@
   --border: rgba(148, 163, 184, 0.1);
   --input: rgba(148, 163, 184, 0.2);
   --ring: #6366f1;
+
+  color-scheme: dark;
 }
 
 body {
@@ -218,4 +220,13 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
   opacity: 0.6;
+}
+
+/* Date Input Icon Fix for Dark Mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(100%);
 }

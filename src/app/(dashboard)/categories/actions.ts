@@ -33,15 +33,15 @@ export async function createCategory(data: {
     return { success: true, data: category }
 }
 
-export async function getCategories(type?: 'income' | 'expense') {
+export async function getCategories(type?: 'income' | 'expense', page = 1, pageSize = 10) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
-    if (!user) return { data: [] }
+    if (!user) return { data: [], count: 0 }
 
     let query = supabase
         .from('categories')
-        .select('*')
+        .select('*', { count: 'exact' })
         .eq('user_id', user.id)
         .order('name')
 
@@ -49,14 +49,17 @@ export async function getCategories(type?: 'income' | 'expense') {
         query = query.eq('type', type)
     }
 
-    const { data, error } = await query
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
+
+    const { data, error, count } = await query.range(from, to)
 
     if (error) {
         console.error('Error fetching categories:', error)
-        return { data: [] }
+        return { data: [], count: 0 }
     }
 
-    return { data }
+    return { data, count }
 }
 
 export async function updateCategory(id: string, data: {

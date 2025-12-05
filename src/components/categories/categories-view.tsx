@@ -8,13 +8,12 @@ import { AddCategoryDialog } from './add-category-dialog'
 
 interface CategoriesViewProps {
     categories: any[]
+    totalCount: number
+    currentPage: number
 }
 
-export function CategoriesView({ categories }: CategoriesViewProps) {
+export function CategoriesView({ categories, totalCount, currentPage }: CategoriesViewProps) {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-
-    // All categories are user categories (no system defaults)
-    const customCategoriesCount = categories.length
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -22,7 +21,7 @@ export function CategoriesView({ categories }: CategoriesViewProps) {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <h1 className="text-3xl sm:text-4xl font-bold mb-2">
-                        <span className="bg-gradient-to-r from-purple-400 to-violet-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-purple-400 to-violet-500 bg-clip-text text-transparent">
                             Gerenciamento de Categorias
                         </span>
                     </h1>
@@ -30,7 +29,7 @@ export function CategoriesView({ categories }: CategoriesViewProps) {
                 </div>
                 <Button
                     onClick={() => setIsAddDialogOpen(true)}
-                    className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 text-white shadow-lg shadow-purple-500/50 transition-all hover-lift"
+                    className="w-full sm:w-auto bg-linear-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 text-white shadow-lg shadow-purple-500/50 transition-all hover-lift"
                 >
                     <Plus className="mr-2 h-4 w-4" />
                     Nova Categoria
@@ -40,15 +39,24 @@ export function CategoriesView({ categories }: CategoriesViewProps) {
             {/* Content */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
+                    <div className="p-2 rounded-lg bg-linear-to-br from-purple-500 to-violet-600 shadow-lg shadow-purple-500/50">
                         <Tag className="h-5 w-5 text-white" />
                     </div>
-                    <h2 className="text-xl font-semibold text-white">
-                        Categorias Personalizadas ({customCategoriesCount})
-                    </h2>
+                    <div>
+                        <h2 className="text-xl font-semibold text-white leading-none mb-1">
+                            Categorias
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                            Exibindo {categories.length} de {totalCount} categorias personalizadas.
+                        </p>
+                    </div>
                 </div>
 
-                <CategoriesTable categories={categories} />
+                <CategoriesTable
+                    categories={categories}
+                    totalCount={totalCount}
+                    currentPage={currentPage}
+                />
             </div>
 
             {/* Footer Note */}
