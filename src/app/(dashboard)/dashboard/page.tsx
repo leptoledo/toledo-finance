@@ -29,7 +29,7 @@ export default async function DashboardPage() {
         <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-4xl font-bold gradient-text mb-2">Dashboard Financeiro</h2>
+                    <h2 className="text-4xl font-bold gradient-text mb-2">Painel Financeiro</h2>
                     <p className="text-muted-foreground">Visão geral das suas finanças</p>
                 </div>
             </div>
