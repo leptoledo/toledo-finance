@@ -52,7 +52,7 @@ export function ConfirmDialog({
             <div className="space-y-6">
                 {/* Icon and Title */}
                 <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-full bg-${variant === 'danger' ? 'red' : variant === 'warning' ? 'yellow' : 'blue'}-500/10 flex items-center justify-center`}>
+                    <div className={`shrink-0 w-12 h-12 rounded-full bg-${variant === 'danger' ? 'red' : variant === 'warning' ? 'yellow' : 'blue'}-500/10 flex items-center justify-center`}>
                         <AlertTriangle className={`h-6 w-6 ${styles.icon}`} />
                     </div>
                     <div className="flex-1">
@@ -66,19 +66,19 @@ export function ConfirmDialog({
                 </div>
 
                 {/* Actions */}
-                <div className="flex justify-end gap-3 pt-2">
+                <div className="flex justify-end gap-3 pt-4">
                     <Button
                         type="button"
-                        variant="outline"
+                        variant="ghost"
                         onClick={onClose}
-                        className="border-border hover:bg-card"
+                        className="border border-white/10 text-gray-400 hover:text-white hover:bg-white/5"
                     >
                         {cancelText}
                     </Button>
                     <Button
                         type="button"
                         onClick={handleConfirm}
-                        className={styles.button}
+                        className={`${styles.button} shadow-lg shadow-red-900/20`}
                     >
                         {confirmText}
                     </Button>

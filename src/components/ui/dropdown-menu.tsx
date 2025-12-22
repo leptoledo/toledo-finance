@@ -46,11 +46,15 @@ export function DropdownMenu({ trigger, children, open, onOpenChange }: Dropdown
 
     return (
         <div className="relative inline-block" ref={dropdownRef}>
-            <div onClick={() => handleOpenChange(!isOpen)}>
+            <div onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleOpenChange(!isOpen)
+            }}>
                 {trigger}
             </div>
             {isOpen && (
-                <div className="absolute right-0 mt-2 min-w-48 w-auto rounded-md border border-border bg-card shadow-lg z-100 animate-in fade-in-0 zoom-in-95">
+                <div className="absolute right-0 mt-2 min-w-56 w-auto rounded-xl border border-white/10 bg-[#0f111a] shadow-2xl shadow-purple-900/40 z-50 animate-in fade-in-0 zoom-in-95 overflow-hidden ring-1 ring-white/5">
                     <div className="py-1">
                         {children}
                     </div>

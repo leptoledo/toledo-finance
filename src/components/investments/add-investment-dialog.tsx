@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea'
 import { createInvestment } from '@/app/(dashboard)/investments/actions'
 import { Loader2, TrendingUp, Building, Bitcoin, Home, Briefcase } from 'lucide-react'
+import { TickerAutocomplete } from './ticker-autocomplete'
 
 interface AddInvestmentDialogProps {
     isOpen: boolean
@@ -57,12 +58,14 @@ export function AddInvestmentDialog({ isOpen, onClose, accounts = [] }: AddInves
                             </div>
                         )}
 
+
+
                         <div className="space-y-2">
                             <Label htmlFor="name" className="text-white">Nome do Investimento</Label>
-                            <Input
+                            <TickerAutocomplete
                                 id="name"
                                 name="name"
-                                placeholder="Ex: Ações PETR4, Bitcoin, Tesouro Direto"
+                                placeholder="Ex: PETR4, BTC, AAPL..."
                                 required
                                 className="bg-gray-800/50 border-white/10"
                             />
@@ -131,7 +134,7 @@ export function AddInvestmentDialog({ isOpen, onClose, accounts = [] }: AddInves
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="amount_invested" className="text-white">Valor Investido</Label>
+                                    <Label htmlFor="amount_invested" className="text-white">Valor Investido (Total)</Label>
                                     <Input
                                         id="amount_invested"
                                         name="amount_invested"
@@ -141,18 +144,27 @@ export function AddInvestmentDialog({ isOpen, onClose, accounts = [] }: AddInves
                                         placeholder="0.00"
                                         required
                                         className="bg-gray-800/50 border-white/10"
+                                        onChange={(e) => {
+                                            // Auto-fill current value if user hasn't typed there yet? 
+                                            // Creating a specific handle for this is better UX
+                                            const val = e.target.value
+                                            const currentInput = document.getElementById('current_value') as HTMLInputElement
+                                            if (currentInput && currentInput.value === '') {
+                                                currentInput.value = val
+                                            }
+                                        }}
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="current_value" className="text-white">Valor Atual</Label>
+                                    <Label htmlFor="current_value" className="text-white">Valor Atual (Total)</Label>
                                     <Input
                                         id="current_value"
                                         name="current_value"
                                         type="number"
                                         step="0.01"
                                         min="0"
-                                        placeholder="0.00"
+                                        placeholder="Igual ao investido (inicialmente)"
                                         required
                                         className="bg-gray-800/50 border-white/10"
                                     />

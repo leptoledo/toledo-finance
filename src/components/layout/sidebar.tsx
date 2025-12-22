@@ -22,7 +22,8 @@ import {
     Shield,
     LogOut,
     Landmark,
-    Repeat
+    Repeat,
+    Briefcase
 } from 'lucide-react'
 
 const navigation = [
@@ -31,12 +32,13 @@ const navigation = [
     { name: 'Despesas', href: '/expenses', icon: TrendingDown, color: 'text-red-400' },
     { name: 'Planejamento', href: '/budgets', icon: PiggyBank, color: 'text-pink-400' },
     { name: 'Investimentos', href: '/investments', icon: LineChart, color: 'text-cyan-400' },
+    { name: 'Portfolios', href: '/portfolio', icon: Briefcase, color: 'text-emerald-400' },
+    { name: 'Recorrências', href: '/recurring', icon: Repeat, color: 'text-orange-300' },
     { name: 'Análise', href: '/analysis', icon: BarChart3, color: 'text-indigo-400' },
     { name: 'Metas', href: '/goals', icon: Target, color: 'text-orange-400' },
     { name: 'Categorias', href: '/categories', icon: Tags, color: 'text-purple-400' },
     { name: 'Contas', href: '/accounts', icon: Wallet, color: 'text-yellow-400' },
     { name: 'Importar', href: '/import', icon: Upload, color: 'text-teal-400' },
-    { name: 'Recorrências', href: '/recurring', icon: Repeat, color: 'text-orange-300' },
     { name: 'Conectar Banco', href: '/connect-bank', icon: Landmark, color: 'text-blue-500' },
 ]
 
