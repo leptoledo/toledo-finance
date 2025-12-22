@@ -558,7 +558,17 @@ export async function getGlobalPortfolioSummary() {
         .select('*')
         .eq('user_id', user.id)
 
-    if (transError || !transactions) return { portfolios, global: { netWorth: 0, invested: 0, profit: 0, profitPercentage: 0 } }
+    if (transError || !transactions) {
+        // Return portfolios with zeroed stats if transactions fail
+        const emptyPortfolios = portfolios.map(p => ({
+            ...p,
+            totalInvested: 0,
+            currentValue: 0,
+            profit: 0,
+            profitPercentage: 0
+        }))
+        return { portfolios: emptyPortfolios, global: { netWorth: 0, invested: 0, profit: 0, profitPercentage: 0 } }
+    }
 
     // 3. Get unique tickers and fetch quotes
     const tickers = Array.from(new Set(transactions.map(t => t.ticker.toUpperCase())))
