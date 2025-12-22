@@ -3,6 +3,7 @@ import { MobileHeader } from '@/components/layout/mobile-header'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { ToastProvider } from '@/components/ui/toast'
+import { RecurringProcessor } from '@/components/recurring/recurring-processor'
 
 export default async function DashboardLayout({
     children,
@@ -24,9 +25,10 @@ export default async function DashboardLayout({
 
     return (
         <ToastProvider>
+            <RecurringProcessor />
             <div className="flex h-screen overflow-hidden">
                 {/* Desktop sidebar */}
-                <div className="hidden md:flex md:flex-shrink-0">
+                <div className="hidden md:flex md:shrink-0">
                     <Sidebar userProfile={profile} userEmail={user.email} />
                 </div>
 

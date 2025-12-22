@@ -21,7 +21,8 @@ import {
     MessageSquare,
     Shield,
     LogOut,
-    Landmark
+    Landmark,
+    Repeat
 } from 'lucide-react'
 
 const navigation = [
@@ -35,6 +36,7 @@ const navigation = [
     { name: 'Categorias', href: '/categories', icon: Tags, color: 'text-purple-400' },
     { name: 'Contas', href: '/accounts', icon: Wallet, color: 'text-yellow-400' },
     { name: 'Importar', href: '/import', icon: Upload, color: 'text-teal-400' },
+    { name: 'Recorrências', href: '/recurring', icon: Repeat, color: 'text-orange-300' },
     { name: 'Conectar Banco', href: '/connect-bank', icon: Landmark, color: 'text-blue-500' },
 ]
 
