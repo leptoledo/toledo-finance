@@ -70,7 +70,7 @@ export function TradesTable({ trades, currency = 'BRL' }: TradesTableProps) {
     const formatMoney = (val: number) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(val)
 
     return (
-        <div className="rounded-md border">
+        <div className="rounded-md border border-border overflow-hidden">
             {/* Hidden dialog for editing */}
             <AddTradeDialog
                 tradeToEdit={editingTrade}

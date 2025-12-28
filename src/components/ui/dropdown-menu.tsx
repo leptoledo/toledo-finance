@@ -96,7 +96,7 @@ export function DropdownMenu({ trigger, children, open, onOpenChange }: Dropdown
                             right: position.right,
                             position: 'absolute'
                         }}
-                        className="min-w-56 w-auto rounded-xl border border-white/10 bg-[#0f111a] shadow-2xl shadow-purple-900/40 z-[9999] animate-in fade-in-0 zoom-in-95 overflow-hidden ring-1 ring-white/5"
+                        className="min-w-56 w-auto rounded-xl border border-white/10 bg-[#0f111a] shadow-2xl shadow-purple-900/40 z-9999 animate-in fade-in-0 zoom-in-95 overflow-hidden ring-1 ring-white/5"
                     >
                         <div className="py-1">
                             {children}
