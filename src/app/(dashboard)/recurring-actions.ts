@@ -147,7 +147,7 @@ export async function processRecurringTransactions() {
 
     if (!user) return { error: 'Unauthorized' }
 
-    const { error } = await supabase.rpc('process_recurring_transactions')
+    const { data: count, error } = await supabase.rpc('process_recurring_transactions')
 
     if (error) {
         console.error('Error processing recurring transactions:', error)
@@ -156,5 +156,5 @@ export async function processRecurringTransactions() {
 
     revalidatePath('/income')
     revalidatePath('/expenses')
-    return { success: true }
+    return { success: true, count: count as number }
 }

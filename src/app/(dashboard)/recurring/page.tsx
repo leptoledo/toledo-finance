@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server'
 import { getRecurringTransactions, RecurringTransaction } from '../recurring-actions'
 import { RecurringTable } from '@/components/recurring/recurring-table'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ProcessRecurrenceButton } from '@/components/recurring/process-recurrence-button'
 import { Repeat } from 'lucide-react'
 
 export default async function RecurringPage() {
@@ -51,7 +52,7 @@ export default async function RecurringPage() {
             <div className="flex items-center justify-between space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">Recorrências</h2>
                 <div className="flex items-center space-x-2">
-                    {/* Placeholder for Add Button if needed, currently added via Income/Expense pages */}
+                    <ProcessRecurrenceButton />
                 </div>
             </div>
 
