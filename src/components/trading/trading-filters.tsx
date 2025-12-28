@@ -67,7 +67,7 @@ export function TradingFilters() {
     }
 
     return (
-        <div className="flex flex-col md:flex-row gap-4 items-end mb-6 p-4 rounded-lg border bg-card">
+        <div className="flex flex-col md:flex-row gap-4 items-end mb-6 p-4 rounded-lg border border-border bg-card">
             <div className="w-full md:w-[200px] space-y-2">
                 <span className="text-sm font-medium">Período</span>
                 <Select value={period} onValueChange={setPeriod}>
