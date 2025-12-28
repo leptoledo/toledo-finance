@@ -5,7 +5,7 @@ import { TradesTable } from '@/components/trading/trades-table'
 import { AddTradeDialog } from '@/components/trading/add-trade-dialog'
 import { TradingFilters } from '@/components/trading/trading-filters'
 import { TradingSettingsDialog } from '@/components/trading/trading-settings-dialog'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
 
 interface TradingPageProps {
     searchParams: Promise<{ [key: string]: string | undefined }>
@@ -60,17 +60,15 @@ export default async function TradingPage({ searchParams }: TradingPageProps) {
 
             <TradingFilters />
 
-            <Card>
-                <CardHeader>
-                    <CardTitle>Diário de Operações</CardTitle>
-                    <CardDescription>
+            <div className="space-y-4">
+                <div>
+                    <h3 className="text-lg font-medium">Diário de Operações</h3>
+                    <p className="text-sm text-muted-foreground">
                         Histórico completo das suas operações de Day Trade e Swing Trade.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <TradesTable trades={(trades || []) as Trade[]} currency={currency} />
-                </CardContent>
-            </Card>
+                    </p>
+                </div>
+                <TradesTable trades={(trades || []) as Trade[]} currency={currency} />
+            </div>
         </div>
     )
 }
